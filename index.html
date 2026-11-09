@@ -157,14 +157,52 @@ body{min-height:100vh;min-height:100dvh}
  .rp{margin:8px auto}
 }
 @media(max-width:380px){.stg{grid-template-columns:1fr}}
+
+/* ===== animasi, tombol mata, loading ===== */
+@keyframes rise{from{opacity:0;transform:translateY(30px) scale(.94)}to{opacity:1;transform:none}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+@keyframes drift{0%,100%{transform:translate(0,0) rotate(-8deg)}50%{transform:translate(14px,-26px) rotate(10deg)}}
+@keyframes blob{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(26px,-18px) scale(1.07)}}
+@keyframes fin{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes sp{to{transform:rotate(360deg)}}
+@keyframes hop{0%,100%{transform:translateY(0) rotate(0)}35%{transform:translateY(-36px) rotate(-9deg)}55%{transform:translateY(-36px) rotate(9deg)}80%{transform:translateY(0) scaleY(.88)}}
+@keyframes pop{0%{transform:scale(.3);opacity:0}70%{transform:scale(1.12)}100%{transform:scale(1);opacity:1}}
+.lbox{animation:rise .8s cubic-bezier(.2,.9,.3,1.15) both}
+#llogo{animation:pop .9s .15s cubic-bezier(.2,.9,.3,1.3) both}
+#llogo>*{display:inline-block;animation:bob 3.2s 1s ease-in-out infinite}
+.lbox h1,.lbox p,.lbox input,.lbox .btn{animation:fin .6s both}
+.lbox h1{animation-delay:.3s}.lbox p{animation-delay:.4s}.lbox input:nth-of-type(1){animation-delay:.5s}.lbox .pw,.lbox input:nth-of-type(2){animation-delay:.6s}.lbox .btn{animation-delay:.7s}
+#login:before{animation:blob 9s ease-in-out infinite}#login:after{animation:blob 11s -3s ease-in-out infinite}
+.fl{position:absolute;z-index:0;font-size:34px;opacity:.6;pointer-events:none;animation:drift 7s ease-in-out infinite;filter:drop-shadow(0 6px 8px rgba(109,79,214,.2))}
+#app{animation:fin .6s both}
+#main>*{animation:fin .35s both}
+#loader{position:fixed;inset:0;z-index:45;display:flex;align-items:center;justify-content:center;background:radial-gradient(900px 520px at 8% -8%,#d9ccff 0,transparent 60%),radial-gradient(800px 520px at 100% 8%,#f9d3ee 0,transparent 55%),var(--bg);opacity:0;pointer-events:none;transition:opacity .35s}
+#loader.on{opacity:1;pointer-events:auto}
+.ld{text-align:center;width:min(86vw,340px)}
+.ld small{display:block;margin-top:12px;color:var(--mut);font-weight:600}
+.blocks{display:flex;gap:12px;justify-content:center;align-items:flex-end;height:96px;margin-bottom:20px}
+.blocks b{width:56px;height:56px;border-radius:15px;display:flex;align-items:center;justify-content:center;font:800 28px 'Plus Jakarta Sans',sans-serif;color:#fff;box-shadow:0 10px 22px rgba(109,79,214,.28);animation:hop 1.15s ease-in-out infinite}
+.blocks b:nth-child(1){background:linear-gradient(135deg,#c4b0ff,#8b6df0)}
+.blocks b:nth-child(2){background:linear-gradient(135deg,#ffc2ea,#f058a8);animation-delay:.16s}
+.blocks b:nth-child(3){background:linear-gradient(135deg,#a5d8ff,#4f9fee);animation-delay:.32s}
+#ldt{font-weight:800;color:var(--pd);margin:0 0 12px;min-height:22px}
+.spin{display:inline-block;width:14px;height:14px;border:2.5px solid currentColor;border-right-color:transparent;border-radius:50%;vertical-align:-2px;animation:sp .7s linear infinite}
+.btn.busy{opacity:.8;cursor:progress;pointer-events:none;transform:none}
+.ib.busy{opacity:1}
+.pw{position:relative;display:block;margin:5px 0 12px}
+.pw input{margin:0;padding-right:46px}
+.eye{position:absolute;right:6px;top:50%;transform:translateY(-50%);width:36px;height:36px;border:0;background:none;color:var(--pd);cursor:pointer;display:flex;align-items:center;justify-content:center;border-radius:50%;padding:0;opacity:.75}
+.eye:hover{opacity:1;background:rgba(167,139,250,.18)}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 </style></head><body>
 <script>
 /* ===== KONFIGURASI =====
    Isi dengan URL Web App Apps Script (Deploy > Manage deployments > Web app URL, berakhiran /exec) */
 window.RAPOR_CONFIG = { API_URL: 'https://script.google.com/macros/s/AKfycbwdeGVoEYrYqiMmkX6R-kYp9dM8kg4cAehruI-hO-I8_2j-utsPWDnsvDGVf48-iAjrvQ/exec' };
 </script>
-<div id="busy"></div><div id="toast"></div>
-<div id="login"><div class="lbox"><div class="big" id="llogo"></div><h1>Rapor TK</h1><p id="lsub">Masuk untuk melihat catatan tumbuh kembang ananda</p>
+<div id="busy"></div>
+<div id="loader"><div class="ld"><div class="blocks"><b>A</b><b>B</b><b>C</b></div><p id="ldt">Memuat&#8230;</p><div class="bar"><i id="ldb" style="width:0%"></i></div><small>Menyiapkan rapor ananda &#10024;</small></div></div><div id="toast"></div>
+<div id="login"><span class="fl" style="left:7%;top:14%;animation-delay:0s">&#9999;&#65039;</span><span class="fl" style="right:9%;top:10%;animation-delay:-2s">&#11088;</span><span class="fl" style="left:12%;bottom:12%;animation-delay:-4s">&#127912;</span><span class="fl" style="right:12%;bottom:16%;animation-delay:-1s">&#128218;</span><span class="fl" style="left:44%;top:5%;animation-delay:-3s">&#129528;</span><span class="fl" style="right:30%;bottom:6%;animation-delay:-5s">&#127752;</span><div class="lbox"><div class="big" id="llogo"></div><h1>Rapor TK</h1><p id="lsub">Masuk untuk melihat catatan tumbuh kembang ananda</p>
 <input id="lu" placeholder="Username" autocomplete="username"><input id="lp" type="password" placeholder="Password" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()">
 <button class="btn" style="width:100%" onclick="doLogin()">Masuk</button><div id="stat" style="font-size:12px;color:#8a7f98;margin-bottom:4px">&#x23F3; Skrip belum aktif&#x2026;</div><div id="lerr" style="color:#c0392b;font-weight:800;min-height:22px;margin-bottom:6px"></div><small>Pertama kali memakai? admin / admin123</small></div></div>
 <div id="app"><div id="topbar"><button class="btn gr tgl" aria-label="Menu" onclick="toggleSide()">&#9776;</button><div id="ptitle">Rapor TK</div><div class="tr"><span id="who"></span><button class="btn gr" aria-label="Pengaturan" onclick="go('set')">&#9881;&#65039;<span class="tx"> Pengaturan</span></button><button class="btn" aria-label="Keluar" onclick="logout()">&#128682;<span class="tx"> Keluar</span></button></div></div>
@@ -269,7 +307,78 @@ var __values = (this && this.__values) || function(o) {
     var img = function (id) { return id ? "https://lh3.googleusercontent.com/d/".concat(id) : ''; };
     var tgl = function (i) { if (!i)
         return ''; var d = new Date(i + 'T00:00:00'); return isNaN(d) ? i : "".concat(d.getDate(), " ").concat(BLN[d.getMonth()], " ").concat(d.getFullYear()); };
-    function fn(f) { H.push(f); return "H[".concat(H.length - 1, "](this)"); }
+    /* ---------- cache data (dimuat sekali saat login) ---------- */
+    var ARP = {}; /* status arsip per kelompok (promise), diisi di latar belakang */
+    function arsipP(k) {
+        if (!ARP[k]) ARP[k] = api('arsipStatus', { kelompok: k }, 0, true).catch(function () { delete ARP[k]; return {}; });
+        return ARP[k];
+    }
+    function prefetchArsip() { ARP = {}; try { aktifK().forEach(function (k) { arsipP(k.id); }); } catch (e) { } }
+    function loadAll(step) {
+        var n = 0, up = function () { n++; if (step) step(n); };
+        return Promise.all([
+            api('all').then(function (d) { D = d; up(); }),
+            api('rapor').then(function (r) { RP = r; up(); }),
+            api('periodik').then(function (r) { PR = r; up(); })
+        ]);
+    }
+    /* ---------- tombol: ikon loading + tidak bisa diklik ulang selama proses ---------- */
+    function setBusy(el, on) {
+        if (!el || el.tagName !== 'BUTTON') return;
+        if (on) {
+            if (el.classList.contains('busy')) return;
+            el._h = el.innerHTML;
+            var t = (el.textContent || '').replace(/^[^\p{L}\p{N}]+/u, '').trim();
+            el.classList.add('busy');
+            el.disabled = true;
+            el.innerHTML = '<span class="spin"></span>' + (el.classList.contains('ib') || !t ? '' : ' ' + esc(t));
+        } else if (el.classList.contains('busy')) {
+            el.classList.remove('busy');
+            el.disabled = false;
+            el.innerHTML = el._h;
+        }
+    }
+    function runBtn(el, f) {
+        if (el && el.classList && el.classList.contains('busy')) return;
+        var r = f(el);
+        if (r && typeof r.then === 'function' && el && el.tagName === 'BUTTON') {
+            setBusy(el, true);
+            var fin = function () { setBusy(el, false); };
+            r.then(fin, fin);
+        }
+        return r;
+    }
+    /* ---------- tombol mata di kolom password ---------- */
+    var EYE_ON = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg>';
+    var EYE_OFF = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.9 17.9A10.9 10.9 0 0 1 12 19C5 19 1 12 1 12a19 19 0 0 1 5.1-5.9M9.9 5.1A10.4 10.4 0 0 1 12 5c7 0 11 7 11 7a19 19 0 0 1-3.2 4.2M1 1l22 22"/><path d="M14.1 14.1a3 3 0 1 1-4.2-4.2"/></svg>';
+    function eyes() {
+        document.querySelectorAll('input[type=password]:not([data-eye])').forEach(function (i) {
+            i.setAttribute('data-eye', '1');
+            var w = document.createElement('span');
+            w.className = 'pw';
+            i.parentNode.insertBefore(w, i);
+            w.appendChild(i);
+            var b = document.createElement('button');
+            b.type = 'button';
+            b.className = 'eye';
+            b.setAttribute('aria-label', 'Tampilkan password');
+            b.innerHTML = EYE_ON;
+            b.onclick = function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                var show = i.type === 'password';
+                i.type = show ? 'text' : 'password';
+                b.innerHTML = show ? EYE_OFF : EYE_ON;
+                b.setAttribute('aria-label', show ? 'Sembunyikan password' : 'Tampilkan password');
+            };
+            w.appendChild(b);
+        });
+    }
+    /* ---------- layar memuat ---------- */
+    function showLoader(t, pct) { Q('#loader').classList.add('on'); if (t) Q('#ldt').textContent = t; Q('#ldb').style.width = (pct || 0) + '%'; }
+    function hideLoader() { Q('#loader').classList.remove('on'); }
+    var LOGGING = false;
+    function fn(f) { H.push(function (el) { return runBtn(el, f); }); return "H[".concat(H.length - 1, "](this)"); }
     function toast(m) { var t = Q('#toast'); t.textContent = m; t.style.display = 'block'; clearTimeout(t._t); t._t = setTimeout(function () { return t.style.display = 'none'; }, 3200); }
     function busy(n) { bz += n ? 1 : -1; Q('#busy').style.display = bz > 0 ? 'block' : 'none'; }
     var API_URL = (window.RAPOR_CONFIG || {}).API_URL || '';
@@ -283,7 +392,7 @@ var __values = (this && this.__values) || function(o) {
             catch (e) { throw new Error('Respons server tidak valid. Pastikan Web App di-deploy dengan akses "Anyone" dan URL sudah benar.'); }
         }, function () { throw new Error('Tidak dapat terhubung ke server. Periksa koneksi internet.'); });
     }
-    function api(a, p, n) {
+    function api(a, p, n, q) {
         n = n || 0;
         busy(1);
         return new Promise(function (ok, no) { return rpc('api', [T, a, p || {}]).then(function (r) {
@@ -295,18 +404,21 @@ var __values = (this && this.__values) || function(o) {
                     return logout();
                 }
                 if (/sibuk/.test(r.error) && n < 3) {
-                    setTimeout(function () { return api(a, p, n + 1).then(ok, no); }, 1500 + n * 1000);
+                    setTimeout(function () { return api(a, p, n + 1, q).then(ok, no); }, 1500 + n * 1000);
                     return;
                 }
-                toast(r.error);
+                if (!q)
+                    toast(r.error);
                 no(r.error);
             }
             else
                 ok(r.ok);
-        }, function (e) { busy(0); toast(e.message); no(e); }); });
+        }, function (e) { busy(0); if (!q)
+            toast(e.message); no(e); }); });
     }
     function doLogin() {
         var er = Q('#lerr');
+        if (LOGGING) return;
         er.textContent = '';
         if (!apiReady()) {
             er.textContent = 'URL Web App belum diisi. Edit RAPOR_CONFIG.API_URL di bagian atas index.html.';
@@ -317,20 +429,19 @@ var __values = (this && this.__values) || function(o) {
             er.textContent = 'Isi username dan password dulu ya';
             return;
         }
-        busy(1);
+        LOGGING = true;
+        var btn = Q('#login .lbox .btn');
+        setBusy(btn, true);
+        showLoader('Memeriksa akun\u2026', 10);
+        var fail = function (msg) { LOGGING = false; setBusy(btn, false); hideLoader(); er.textContent = msg; };
+        var TXT = ['Memuat data siswa & kelompok\u2026', 'Memuat rapor siswa\u2026', 'Memuat TB, BB & kehadiran\u2026', 'Hampir selesai\u2026'];
         rpc('login', [u, p]).then(function (r) {
-            busy(0);
-            if (!r) {
-                er.textContent = 'Server tidak merespons. Pastikan Code.gs terbaru sudah di-deploy (Deploy > Manage deployments > Edit > New version).';
-                return;
-            }
-            if (r.error) {
-                er.textContent = r.error;
-                return;
-            }
+            if (!r) return fail('Server tidak merespons. Pastikan Code.gs terbaru sudah di-deploy (Deploy > Manage deployments > Edit > New version).');
+            if (r.error) return fail(r.error);
             T = r.ok.token;
             U = r.ok.user;
-            return reload().then(function () {
+            showLoader(TXT[0], 25);
+            return loadAll(function (n) { showLoader(TXT[Math.min(n, 3)], 25 + n * 25); }).then(function () {
                 Q('#login').style.display = 'none';
                 Q('#app').style.display = 'block';
                 brand(D.Ref);
@@ -338,14 +449,14 @@ var __values = (this && this.__values) || function(o) {
                 buildMenu();
                 startNav();
                 go('dash');
+                setTimeout(function () { hideLoader(); LOGGING = false; setBusy(btn, false); }, 350);
+                prefetchArsip();
             }, function (x) {
                 T = null;
                 U = null;
-                Q('#login').style.display = 'flex';
-                Q('#app').style.display = 'none';
-                er.textContent = 'Gagal memuat data: ' + ((x && x.message) || x || 'tidak diketahui') + '. Coba masuk lagi.';
+                fail('Gagal memuat data: ' + ((x && x.message) || x || 'tidak diketahui') + '. Coba masuk lagi.');
             });
-        }, function (x) { busy(0); er.textContent = x.message; });
+        }, function (x) { fail(x.message); });
     }
     window.addEventListener('error', function (e) { var el = Q('#lerr'); if (el && Q('#login').style.display !== 'none')
         el.textContent = 'Error skrip: ' + e.message; });
@@ -514,6 +625,14 @@ var __values = (this && this.__values) || function(o) {
                 case 3: return [2 /*return*/];
             }
         }); }); };
+        var ms = m.querySelector('#ms'), mc = m.querySelector('#mc'), sv = ms.onclick;
+        ms.onclick = function () {
+            mc.disabled = true;
+            var r = runBtn(ms, sv);
+            if (r && r.then) r.then(function () { mc.disabled = false; }, function () { mc.disabled = false; });
+            else mc.disabled = false;
+            return r;
+        };
     }
     function table(heads, rows) { return "<div class=\"tw\"><table><thead><tr>".concat(heads.map(function (h) { return "<th>".concat(h, "</th>"); }).join(''), "</tr></thead><tbody>").concat(rows.map(function (r) { return "<tr>".concat(r.map(function (c, ci) { return "<td data-l=\"".concat(esc(heads[ci] || ''), "\">").concat(c, "</td>"); }).join(''), "</tr>"); }).join('') || "<tr><td colspan=\"".concat(heads.length, "\" class=\"empty\">Belum ada data \uD83C\uDF31</td></tr>"), "</tbody></table></div>"); }
     function fld(c, v) {
@@ -640,7 +759,7 @@ var __values = (this && this.__values) || function(o) {
         var X, adm, st, tot, done, pct, pg, warn;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, api('rapor')];
+                case 0: return [4 /*yield*/, Promise.resolve(RP)];
                 case 1:
                     RP = _a.sent();
                     X = D.Ref, adm = U.role === 'admin';
@@ -810,7 +929,7 @@ var __values = (this && this.__values) || function(o) {
         var k;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, api('rapor')];
+                case 0: return [4 /*yield*/, Promise.resolve(RP)];
                 case 1:
                     RP = _a.sent();
                     k = curK('input', false, true);
@@ -920,10 +1039,8 @@ var __values = (this && this.__values) || function(o) {
     /* ---------- cetak ---------- */
     P.cetak = function () {
         var k0 = curK('cetak', false, true);
-        return Promise.all([api('rapor'), api('periodik'), api('arsipStatus', { kelompok: k0 }).catch(function () { return {}; })]).then(function (rr) {
-            RP = rr[0];
-            PR = rr[1];
-            var AR = rr[2] || {}, k = curK('cetak', false, true), L = aktifS().filter(function (s) { return s.kelompok == k; });
+        return arsipP(k0).then(function (ar) {
+            var AR = ar || {}, k = curK('cetak', false, true), L = aktifS().filter(function (s) { return s.kelompok == k; });
             set('Cetak Rapor', selK('cetak', false, true) + '<button class="btn gr" onclick="' + fn(function () { return arsipkan(L, k); }) + '">&#128230; Arsipkan rapor</button><button class="btn lf" onclick="' + fn(function () { return showPrint(L); }) + '">\uD83D\uDDA8\uFE0F Cetak semua di kelompok ini</button>' +
                 table(['Nama Siswa', 'Status Isi', 'Status Arsip', 'Cetak'], L.map(function (s) {
                     return [esc(s.nama),
@@ -988,6 +1105,7 @@ var __values = (this && this.__values) || function(o) {
                         return [3 /*break*/, 6];
                     case 11:
                         m.remove();
+                        delete ARP[k];
                         if (CUR === 'cetak')
                             go('cetak');
                         info(gagal.length ? 'Arsip selesai dengan catatan' : 'Arsip selesai', '<p><b>' + okN + '</b> dari ' + L.length + ' rapor berhasil disimpan' + (tot ? ' (' + tot + ' file lama diganti).' : '.') + '</p><p>Folder: <a href="' + esc(f.url) + '" target="_blank" rel="noopener"><b>' + esc(f.path) + '</b></a></p>' + (gagal.length ? '<p style="color:#b03060">Gagal: ' + gagal.map(esc).join(', ') + '. Coba arsipkan ulang.</p>' : ''));
@@ -1023,7 +1141,7 @@ var __values = (this && this.__values) || function(o) {
             var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, api('periodik')];
+                    case 0: return [4 /*yield*/, Promise.resolve(PR)];
                     case 1:
                         PR = _a.sent();
                         k = curK(page, false, true), L = aktifS().filter(function (s) { return s.kelompok == k; }), X = D.Ref;
@@ -1330,13 +1448,16 @@ var __values = (this && this.__values) || function(o) {
         }
     }); }); }), "\">Simpan password</button></div>\n <button class=\"btn gr\" onclick=\"").concat(fn(function () { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, reload()];
+            case 0: return [4 /*yield*/, loadAll()];
             case 1:
                 _a.sent();
+                prefetchArsip();
                 toast('Data dimuat ulang \u2714');
                 return [2 /*return*/];
         }
     }); }); }), "\">\uD83D\uDD04 Muat ulang data</button>")); };
+    eyes();
+    new MutationObserver(eyes).observe(document.body, { childList: true, subtree: true });
     (function () {
         var st = Q('#stat');
         if (!apiReady()) {

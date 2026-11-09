@@ -1,0 +1,1363 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#a78bfa">
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="apple-touch-icon" href="logo.png">
+<meta name="mobile-web-app-capable" content="yes">
+<title>E-Rapor TK IT Al Mubarok</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>:root{--bg:#f4f0ff;--ink:#2b2547;--mut:#7d759e;--p:#a78bfa;--p2:#8b6df0;--pd:#6d4fd6;--pl:#ede7ff;--pk:#f5b8e4;--sk:#a5d8ff;--line:#8b6df0;--glass:rgba(255,255,255,.58);--gb:rgba(255,255,255,.75);--sh:0 10px 34px rgba(109,79,214,.16)}
+*{box-sizing:border-box}
+html{background:var(--bg)}
+body{margin:0;font-family:'Plus Jakarta Sans',system-ui,-apple-system,Segoe UI,sans-serif;color:var(--ink);font-size:14.5px;min-height:100vh;
+background:radial-gradient(900px 520px at 8% -8%,#d9ccff 0,transparent 60%),radial-gradient(800px 520px at 100% 8%,#f9d3ee 0,transparent 55%),radial-gradient(900px 600px at 70% 110%,#cfe6ff 0,transparent 60%),var(--bg);background-attachment:fixed}
+h1,h2,h3{margin:.2em 0;letter-spacing:-.02em;font-weight:800}h2{font-size:26px}h3{font-size:17px}
+.glass,.card,.tw,.lbox,.md,#side,#topbar{background:var(--glass);-webkit-backdrop-filter:blur(18px) saturate(170%);backdrop-filter:blur(18px) saturate(170%);border:1px solid var(--gb);box-shadow:var(--sh)}
+.btn{font:700 13.5px 'Plus Jakarta Sans',sans-serif;color:#fff;background:linear-gradient(135deg,var(--p),var(--p2));border:0;border-radius:999px;padding:9px 18px;cursor:pointer;box-shadow:0 6px 16px rgba(139,109,240,.35);margin:4px 6px 12px 0;transition:.18s}
+.btn:hover{transform:translateY(-1px);box-shadow:0 10px 22px rgba(139,109,240,.42)}.btn:active{transform:none}
+.btn.gr{background:rgba(255,255,255,.7);color:var(--pd);box-shadow:inset 0 0 0 1.5px rgba(139,109,240,.35)}
+.btn.lf{background:linear-gradient(135deg,#b49dff,#7c5cd6)}
+.ib{border:0;background:none;font-size:16px;cursor:pointer;opacity:.75;transition:.15s}.ib:hover{opacity:1;transform:scale(1.15)}
+input,select,textarea{font:600 14px 'Plus Jakarta Sans',sans-serif;width:100%;padding:10px 14px;border:1.5px solid rgba(139,109,240,.25);border-radius:14px;background:rgba(255,255,255,.75);color:var(--ink);margin:5px 0 12px;outline:0;transition:.15s}
+input:focus,select:focus,textarea:focus{border-color:var(--p2);box-shadow:0 0 0 4px rgba(167,139,250,.28);background:#fff}
+textarea{min-height:76px;resize:vertical}.sel{width:auto;min-width:230px;margin:0 10px 14px 0;vertical-align:middle}
+label{font-weight:700;display:block;font-size:13px;color:#4a4270}
+.tw{overflow-x:auto;border-radius:20px}
+table{border-collapse:collapse;width:100%}
+th{background:rgba(167,139,250,.2);color:var(--pd);text-align:left;padding:12px 14px;font-weight:800;font-size:12.5px;text-transform:uppercase;letter-spacing:.04em}
+td{padding:11px 14px;border-top:1px solid rgba(139,109,240,.12)}tbody tr:hover td{background:rgba(255,255,255,.55)}
+.empty{text-align:center;padding:28px;color:var(--mut)}
+#login{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:16px;position:relative;overflow:hidden}
+#login:before,#login:after{content:"";position:absolute;border-radius:50%;filter:blur(10px);z-index:0}
+#login:before{width:420px;height:420px;background:radial-gradient(circle at 30% 30%,#c4b0ff,#9b7bf5);left:10%;top:8%;opacity:.7}
+#login:after{width:360px;height:360px;background:radial-gradient(circle at 60% 40%,#ffc2ea,#d8a8ff);right:9%;bottom:6%;opacity:.7}
+.lbox{position:relative;z-index:1;border-radius:32px;padding:34px 30px;width:100%;max-width:390px;text-align:center;background:rgba(255,255,255,.5)}
+.lbox .big{font-size:50px;line-height:1;margin-bottom:6px}.lbox h1{font-size:30px;background:linear-gradient(135deg,var(--p2),#d46bd0);-webkit-background-clip:text;background-clip:text;color:transparent}
+#llogo img{height:88px;max-width:200px;object-fit:contain;filter:drop-shadow(0 8px 14px rgba(109,79,214,.25))}.lg0{font-size:52px}#slogo img{height:40px;max-width:64px;object-fit:contain}
+.lbox p{color:var(--mut);margin:4px 0 18px}.lbox small{color:var(--mut)}.lbox input{text-align:left}
+#app{display:none;min-height:100vh}
+#side{position:fixed;top:14px;bottom:14px;left:14px;width:252px;border-radius:26px;overflow:auto;padding:18px 14px;z-index:5}
+#side h1{font-size:22px;color:var(--pd);margin:2px 8px 4px}
+.menu a{display:flex;gap:11px;align-items:center;padding:10px 14px;margin:3px 0;border-radius:14px;color:#4a4270;text-decoration:none;font-weight:700;cursor:pointer;transition:.15s}
+.menu a:hover{background:rgba(167,139,250,.18);color:var(--pd)}
+.menu a.on{background:linear-gradient(135deg,var(--p),var(--p2));color:#fff;box-shadow:0 8px 18px rgba(139,109,240,.4)}
+#topbar{position:sticky;top:14px;z-index:6;display:flex;align-items:center;gap:12px;margin:14px 30px 0 280px;padding:9px 14px 9px 20px;border-radius:20px;max-width:1180px}
+#ptitle{font-weight:800;color:var(--pd);font-size:15px;flex:1}.tr{display:flex;align-items:center;gap:6px}.tr .btn{margin:0;padding:8px 16px}#who{font-size:12.5px;font-weight:700;color:var(--mut);margin-right:8px}.tgl{display:none;margin:0!important}
+.mg{font-size:11px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--mut);margin:16px 12px 5px}.mg:first-child{margin-top:4px}
+#main{margin-left:280px;padding:22px 30px 28px;max-width:1180px}
+.card{border-radius:22px;padding:18px 20px;margin-bottom:18px;position:relative}
+.card h3{margin-top:0}.card.c1{border-top:4px solid var(--p)}.card.c2{border-top:4px solid #7fd6c2}.card.c3{border-top:4px solid var(--pk)}
+.row{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0 16px}
+.chk{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 14px}
+.pill{display:inline-flex!important;gap:7px;align-items:center;background:rgba(255,255,255,.7);border:1.5px solid rgba(139,109,240,.28);border-radius:999px;padding:6px 14px;font-weight:600!important;font-size:13px!important;cursor:pointer;transition:.15s;color:var(--ink)!important}
+.pill:hover{border-color:var(--p2)}.pill input{width:auto;margin:0;accent-color:var(--p2)}
+.pill:has(input:checked){background:linear-gradient(135deg,var(--p),var(--p2));color:#fff!important;border-color:transparent;box-shadow:0 6px 14px rgba(139,109,240,.3)}
+.lv{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 14px}
+.tabs{display:flex;gap:8px;margin:12px 0 18px;flex-wrap:wrap}.tabs .btn{margin:0}
+.up{display:flex;gap:14px;align-items:center;margin-bottom:14px}.up img{height:68px;max-width:130px;border:1.5px dashed rgba(139,109,240,.5);border-radius:14px;background:rgba(255,255,255,.7);object-fit:contain;padding:4px}.up input{margin:0}
+.photos{display:flex;gap:12px;flex-wrap:wrap;margin:8px 0 12px}.ph{position:relative}.ph img{height:92px;border-radius:16px;display:block;box-shadow:0 6px 16px rgba(109,79,214,.25)}
+.ph .x{position:absolute;top:-8px;right:-8px;border:0;background:linear-gradient(135deg,#f58ac4,#d4509a);color:#fff;border-radius:50%;width:24px;height:24px;cursor:pointer;font-weight:800;box-shadow:0 4px 10px rgba(212,80,154,.4)}
+.addph{width:92px;height:92px;border:1.5px dashed rgba(139,109,240,.6);border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;font-size:24px;background:rgba(255,255,255,.55);text-align:center;transition:.15s}.addph:hover{background:rgba(167,139,250,.2)}.addph small{font-size:11px;font-weight:700;color:var(--pd)}
+.ov{position:fixed;top:0;right:0;bottom:0;left:0;background:rgba(60,40,120,.28);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;z-index:20;padding:12px}
+.md{border-radius:26px;width:100%;max-width:520px;max-height:92vh;display:flex;flex-direction:column;padding:22px;background:rgba(255,255,255,.78)}
+.mb{overflow:auto;padding:2px}.mf{text-align:right;padding-top:12px}
+#toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:rgba(43,37,71,.88);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);color:#fff;padding:11px 22px;border-radius:999px;z-index:50;display:none;font-weight:700;box-shadow:0 10px 30px rgba(43,37,71,.35)}
+#busy{position:fixed;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#c4b0ff,#8b6df0,#f5b8e4,#8b6df0,#c4b0ff);background-size:200% 100%;animation:bz 1s linear infinite;z-index:60;display:none}
+@keyframes bz{to{background-position:-200% 0}}
+.btn.dg{background:linear-gradient(135deg,#f58ac4,#d4509a);box-shadow:0 6px 16px rgba(212,80,154,.35)}
+.hero{background:linear-gradient(135deg,rgba(167,139,250,.35),rgba(245,184,228,.35));border-top:0}.hero h3{font-size:20px;margin:0 0 4px;color:var(--pd)}.hero p{margin:0;color:#4a4270}
+.stg{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin-bottom:18px}
+.st{display:flex;align-items:center;gap:14px;padding:16px;border-radius:20px;background:var(--glass);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);border:1px solid var(--gb);box-shadow:var(--sh)}
+.st b{display:block;font-size:24px;line-height:1.1}.st span{font-size:12.5px;color:var(--mut);font-weight:700}
+.si{width:46px;height:46px;border-radius:15px;display:flex;align-items:center;justify-content:center;font-size:22px;flex:none}
+.st.a .si{background:linear-gradient(135deg,#d9ccff,#a78bfa)}.st.b .si{background:linear-gradient(135deg,#cfe6ff,#7fb8f5)}.st.c .si{background:linear-gradient(135deg,#ffd6ef,#f5a0d6)}.st.d .si{background:linear-gradient(135deg,#d3f5e8,#7fd6c2)}.st.e .si{background:linear-gradient(135deg,#fff0c7,#ffc95e)}
+.bar{height:10px;border-radius:99px;background:rgba(139,109,240,.18);overflow:hidden}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--p),var(--p2));border-radius:99px;transition:width .5s}
+.pg{margin:12px 0}.pgh{display:flex;justify-content:space-between;gap:10px;font-size:13px;margin-bottom:5px}.pgh span{color:var(--mut);font-weight:700}
+input.ti{width:130px;margin:0;padding:8px 10px}.md.wide{max-width:780px}.fg{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
+label.btn{color:var(--pd);font:700 13.5px 'Plus Jakarta Sans',sans-serif}
+@media(max-width:640px){.fg{grid-template-columns:1fr}}
+.eh{background:rgba(167,139,250,.2);color:var(--pd);padding:9px 14px;border-radius:14px;font-weight:800;font-size:15px;margin:2px 0 10px}
+/* ---- cetak ---- */
+#print{display:none;position:fixed;inset:0;background:#ddd;overflow:auto;z-index:40}
+.pbar{position:sticky;top:0;background:#fff;padding:8px 16px;border-bottom:3px solid var(--line)}
+.rp{background:#fff;width:210mm;min-height:297mm;margin:12px auto;padding:15mm;color:#000;font:12pt/1.4 'Times New Roman',Times,serif;box-sizing:border-box;box-shadow:0 6px 24px rgba(0,0,0,.2)}
+.rp,.rp *{font-family:'Times New Roman',Times,serif}
+.rp h1,.rp h2{font-size:12pt;font-weight:700;margin:0;text-align:center}
+.rp .hd{display:flex;align-items:center;gap:12px;border-bottom:3px double #000;padding-bottom:8px;margin-bottom:10px}.rp .hd img{height:22mm;width:auto}.rp .hd div{flex:1}
+.rp .hd p{margin:0;text-align:center;font-size:12pt}
+.rp table{width:100%;border-collapse:collapse;margin:6px 0}.rp th,.rp td{border:1px solid #000;padding:4px 6px;vertical-align:top;background:none;font-size:12pt;line-height:1.4}
+.rp th{background:#eee;text-align:center;color:#000;text-transform:none;letter-spacing:0;font-weight:700;font-size:12pt}.rp .id td{border:0;padding:1px 4px}.rp .c{text-align:center}
+.rp .lb{width:27%;font-weight:700}
+.rp h3{font-size:12pt;font-weight:700;margin:10px 0 2px;background:#eee;padding:3px 6px;border:1px solid #000}
+.rp td.imc{text-align:center;padding:6px}.rp .im{display:flex;justify-content:center;gap:4mm;flex-wrap:wrap;margin:0}.rp .im img{width:56mm;height:42mm;object-fit:cover;border:1px solid #777}
+.rp .box{border:1px solid #000;min-height:38mm;padding:6px}
+.rp .sg{display:flex;justify-content:space-between;text-align:center;margin-top:10px}.rp .sg>div{width:42%}.rp .sg img{height:55px;display:block;margin:2px auto}.rp .sp{height:55px}
+.rp table,.rp tr,.rp .box,.rp .sg{break-inside:avoid;page-break-inside:avoid}.rp h3{break-after:avoid;page-break-after:avoid}
+@media print{@page{size:A4 portrait;margin:15mm}html,body{background:#fff!important;height:auto!important}#app,#login{display:none!important}body *{visibility:hidden}#print,#print *{visibility:visible}#print{position:absolute;left:0;top:0;width:100%;overflow:visible;background:#fff}.pbar{display:none}.rp{margin:0;padding:0;width:auto;min-height:0;box-shadow:none;page-break-after:always}.rp:last-child{page-break-after:auto}}
+@media(max-width:800px){#side{transform:translateX(-120%);transition:.25s;box-shadow:0 20px 60px rgba(60,40,120,.35)}#side.open{transform:none}#main{margin-left:0;padding:14px}#topbar{margin:10px 12px 0;top:10px;padding:8px 10px}.tgl{display:inline-block}#who{display:none}#ptitle{font-size:14px}.tr .btn{padding:8px 12px;font-size:12.5px}}
+
+/* ===== Perbaikan tampilan & responsif ===== */
+html{-webkit-text-size-adjust:100%}
+body{min-height:100vh;min-height:100dvh}
+#login,#app{min-height:100vh;min-height:100dvh}
+#scrim{display:none}
+.rp{zoom:var(--pz,1)}
+@media print{.rp{zoom:1!important}}
+.tx{display:inline}
+@media(max-width:800px){
+ body{background-attachment:scroll;font-size:15px}
+ #side{top:0;bottom:0;left:0;width:min(84vw,310px);border-radius:0 26px 26px 0;padding:calc(16px + env(safe-area-inset-top)) 14px calc(16px + env(safe-area-inset-bottom));height:100vh;height:100dvh;overscroll-behavior:contain;z-index:30;-webkit-overflow-scrolling:touch}
+ #scrim{display:block;position:fixed;inset:0;background:rgba(43,37,71,.38);z-index:25;opacity:0;pointer-events:none;transition:opacity .25s}
+ #scrim.on{opacity:1;pointer-events:auto}
+ .menu a{padding:13px 14px;font-size:15px}
+ #topbar{margin:calc(8px + env(safe-area-inset-top)) 10px 0;top:calc(8px + env(safe-area-inset-top));padding:7px 8px 7px 8px;gap:8px;border-radius:18px}
+ #ptitle{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+ .tr{gap:4px}.tr .btn{padding:0;width:40px;height:40px;font-size:17px;display:inline-flex;align-items:center;justify-content:center}
+ .tx{display:none}
+ .tgl{width:40px;height:40px;padding:0!important;display:inline-flex!important;align-items:center;justify-content:center;font-size:18px}
+ #main{padding:14px 12px calc(28px + env(safe-area-inset-bottom));min-width:0}
+ h2{font-size:21px;line-height:1.25}
+ .card{padding:14px 14px;border-radius:20px;margin-bottom:14px}
+ .stg{grid-template-columns:1fr 1fr;gap:10px}.st{padding:12px;gap:10px;border-radius:18px}.st b{font-size:20px}.si{width:40px;height:40px;font-size:19px;border-radius:13px}
+ .row{grid-template-columns:1fr}
+ .btn{min-height:40px;padding:9px 16px;margin:4px 6px 10px 0}
+ .sel{width:100%;min-width:0;margin:0 0 12px}
+ input,select,textarea{font-size:16px;padding:11px 14px}
+ .ib{font-size:20px;padding:8px 10px}
+ .tabs{flex-wrap:nowrap;overflow-x:auto;gap:6px;padding-bottom:4px;-webkit-overflow-scrolling:touch}.tabs .btn{flex:none;white-space:nowrap;margin:0}
+ .up{flex-wrap:wrap}
+ .photos{gap:10px}
+ .pill{padding:8px 14px}
+ /* dialog = bottom sheet */
+ .ov{align-items:flex-end;padding:0}
+ .md,.md.wide{max-width:100%!important;width:100%;max-height:92vh;max-height:92dvh;border-radius:26px 26px 0 0;padding:18px 16px calc(14px + env(safe-area-inset-bottom));animation:sheet .22s ease-out}
+ .mf{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap}.mf .btn{margin:0;flex:1;min-width:110px}
+ @keyframes sheet{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
+ #toast{left:12px;right:12px;transform:none;text-align:center;border-radius:18px;bottom:auto;top:calc(68px + env(safe-area-inset-top))}
+ .lbox{padding:28px 20px;border-radius:28px}
+ #login:before{width:260px;height:260px;left:-60px;top:-20px}#login:after{width:240px;height:240px;right:-60px;bottom:-20px}
+ /* tabel -> kartu */
+ .tw{background:none;border:0;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none;overflow:visible;border-radius:0}
+ .tw table,.tw tbody,.tw tr,.tw td{display:block;width:100%}
+ .tw thead{display:none}
+ .tw tr{background:var(--glass);border:1px solid var(--gb);border-radius:18px;box-shadow:var(--sh);padding:6px 2px;margin-bottom:10px}
+ .tw td{border:0;padding:7px 14px;display:flex;justify-content:space-between;align-items:center;gap:12px;text-align:right;overflow-wrap:anywhere}
+ .tw td::before{content:attr(data-l);flex:none;max-width:42%;font-weight:800;font-size:11.5px;text-transform:uppercase;letter-spacing:.03em;color:var(--mut);text-align:left}
+ .tw td[data-l=""]::before,.tw td[data-l="Aksi"]::before,.tw td:first-child::before{display:none}
+ .tw td:first-child{justify-content:flex-start;text-align:left;font-weight:800;font-size:15.5px;color:var(--pd)}
+ .tw td[data-l=""]:not(:first-child),.tw td[data-l="Aksi"]:not(:first-child){justify-content:flex-end;gap:6px;border-top:1px solid rgba(139,109,240,.12);margin-top:4px;padding-top:6px}
+ .tw td .btn{margin:0}
+ .tw tbody tr:hover td{background:none}
+ .tw td.empty{display:block;text-align:center;font-weight:600;color:var(--mut)}
+ input.ti{width:110px;text-align:right}
+ /* pratinjau cetak */
+ #print{background:#cfcfd6}
+ .pbar{display:flex;gap:8px;padding:calc(8px + env(safe-area-inset-top)) 12px 8px;z-index:2}.pbar .btn{margin:0;flex:1;padding:8px 10px;font-size:13px;white-space:nowrap}
+ .rp{margin:8px auto}
+}
+@media(max-width:380px){.stg{grid-template-columns:1fr}}
+</style></head><body>
+<script>
+/* ===== KONFIGURASI =====
+   Isi dengan URL Web App Apps Script (Deploy > Manage deployments > Web app URL, berakhiran /exec) */
+window.RAPOR_CONFIG = { API_URL: 'https://script.google.com/macros/s/AKfycbwdeGVoEYrYqiMmkX6R-kYp9dM8kg4cAehruI-hO-I8_2j-utsPWDnsvDGVf48-iAjrvQ/exec' };
+</script>
+<div id="busy"></div><div id="toast"></div>
+<div id="login"><div class="lbox"><div class="big" id="llogo"></div><h1>Rapor TK</h1><p id="lsub">Masuk untuk melihat catatan tumbuh kembang ananda</p>
+<input id="lu" placeholder="Username" autocomplete="username"><input id="lp" type="password" placeholder="Password" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()">
+<button class="btn" style="width:100%" onclick="doLogin()">Masuk</button><div id="stat" style="font-size:12px;color:#8a7f98;margin-bottom:4px">&#x23F3; Skrip belum aktif&#x2026;</div><div id="lerr" style="color:#c0392b;font-weight:800;min-height:22px;margin-bottom:6px"></div><small>Pertama kali memakai? admin / admin123</small></div></div>
+<div id="app"><div id="topbar"><button class="btn gr tgl" aria-label="Menu" onclick="toggleSide()">&#9776;</button><div id="ptitle">Rapor TK</div><div class="tr"><span id="who"></span><button class="btn gr" aria-label="Pengaturan" onclick="go('set')">&#9881;&#65039;<span class="tx"> Pengaturan</span></button><button class="btn" aria-label="Keluar" onclick="logout()">&#128682;<span class="tx"> Keluar</span></button></div></div>
+<div id="scrim" onclick="closeSide()"></div><div id="side"><div style="display:flex;gap:10px;align-items:center;margin:2px 8px 10px"><span id="slogo"></span><div><h1 style="margin:0">Rapor TK</h1><div id="ssub" style="font-size:11.5px;color:var(--mut);font-weight:600"></div></div></div><div class="menu" id="menu"></div></div>
+<div id="main"></div></div>
+<div id="print"><div class="pbar"><button class="btn" onclick="window.print()">&#x1F5A8;&#xFE0F; Cetak / Simpan PDF</button><button class="btn gr" onclick="closePrint()">Tutup</button></div><div id="pc"></div></div>
+<script>window.onerror=function(m,u,l){var e=document.getElementById('stat');if(e)e.textContent='ERROR SKRIP: '+m+' (baris '+l+')';return false};var __b=document.getElementById('stat');if(__b)__b.textContent='Skrip dasar aktif, memuat aplikasi...';</script>
+<script>"use strict";
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g = Object.create((typeof Iterator === "function" ? Iterator : Object).prototype);
+    return g.next = verb(0), g["throw"] = verb(1), g["return"] = verb(2), typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (g && (g = 0, op[0] && (_ = 0)), _) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+var __read = (this && this.__read) || function (o, n) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator];
+    if (!m) return o;
+    var i = m.call(o), r, ar = [], e;
+    try {
+        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
+    }
+    catch (error) { e = { error: error }; }
+    finally {
+        try {
+            if (r && !r.done && (m = i["return"])) m.call(i);
+        }
+        finally { if (e) throw e.error; }
+    }
+    return ar;
+};
+var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
+};
+var __values = (this && this.__values) || function(o) {
+    var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
+    if (m) return m.call(o);
+    if (o && typeof o.length === "number") return {
+        next: function () {
+            if (o && i >= o.length) o = void 0;
+            return { value: o && o[i++], done: !o };
+        }
+    };
+    throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
+};
+(function () {
+    var _this = this;
+    var Q = function (s) { return document.querySelector(s); };
+    var LV = ['Sangat Baik', 'Baik', 'Cukup Baik', 'Perlu Dilatih'];
+    var DIM = ['Keimanan dan Ketakwaan terhadap Tuhan YME', 'Kewargaan', 'Penalaran Kritis', 'Kreativitas', 'Kolaborasi', 'Kemandirian', 'Kesehatan', 'Komunikasi'];
+    var BLN = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+    var MENU = [['dash', '&#127968;', 'Dashboard'], ['guru', '&#128105;&#8205;&#127979;', 'Data Guru', 1], ['siswa', '&#129490;', 'Data Siswa'], ['kel', '&#127979;', 'Kelompok & Ekstra', 1], ['ref', '&#127991;&#65039;', 'Data Referensial', 1], ['cp', '&#127919;', 'Capaian Pembelajaran', 1], ['kokur', '&#127912;', 'Kokurikuler', 1], ['ekstra', '&#9917;', 'Ekstrakurikuler', 1], ['ukur', '&#128207;', 'Input TB & BB'], ['hadir', '&#128197;', 'Input Kehadiran'], ['input', '&#9999;&#65039;', 'Input Rapor'], ['cetak', '&#128424;&#65039;', 'Cetak Rapor'], ['set', '&#9881;&#65039;', 'Pengaturan']];
+    var GRP = [['Data Master', ['guru', 'siswa', 'kel', 'ref', 'cp', 'kokur', 'ekstra']], ['Rapor', ['ukur', 'hadir', 'input', 'cetak']]];
+    var T = null, U = null, D = {}, RP = {}, R = {}, CUR = '', H = [], FS = {}, PBn = 0, bz = 0;
+    var esc = function (s) { return String(s !== null && s !== void 0 ? s : '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); };
+    var img = function (id) { return id ? "https://lh3.googleusercontent.com/d/".concat(id) : ''; };
+    var tgl = function (i) { if (!i)
+        return ''; var d = new Date(i + 'T00:00:00'); return isNaN(d) ? i : "".concat(d.getDate(), " ").concat(BLN[d.getMonth()], " ").concat(d.getFullYear()); };
+    function fn(f) { H.push(f); return "H[".concat(H.length - 1, "](this)"); }
+    function toast(m) { var t = Q('#toast'); t.textContent = m; t.style.display = 'block'; clearTimeout(t._t); t._t = setTimeout(function () { return t.style.display = 'none'; }, 3200); }
+    function busy(n) { bz += n ? 1 : -1; Q('#busy').style.display = bz > 0 ? 'block' : 'none'; }
+    var API_URL = (window.RAPOR_CONFIG || {}).API_URL || '';
+    var apiReady = function () { return /^https:\/\/script\.google(usercontent)?\.com\//.test(API_URL); };
+    /* Panggil fungsi di Apps Script lewat Web App (POST text/plain = tanpa preflight CORS) */
+    function rpc(fn, args) {
+        return fetch(API_URL, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify({ fn: fn, args: args || [] }) })
+            .then(function (r) { return r.text(); })
+            .then(function (t) {
+            try { return JSON.parse(t); }
+            catch (e) { throw new Error('Respons server tidak valid. Pastikan Web App di-deploy dengan akses "Anyone" dan URL sudah benar.'); }
+        }, function () { throw new Error('Tidak dapat terhubung ke server. Periksa koneksi internet.'); });
+    }
+    function api(a, p, n) {
+        n = n || 0;
+        busy(1);
+        return new Promise(function (ok, no) { return rpc('api', [T, a, p || {}]).then(function (r) {
+            busy(0);
+            r = r || { error: 'Server tidak merespons' };
+            if (r.error) {
+                if (r.error === 'SESI') {
+                    toast('Sesi berakhir, silakan masuk lagi');
+                    return logout();
+                }
+                if (/sibuk/.test(r.error) && n < 3) {
+                    setTimeout(function () { return api(a, p, n + 1).then(ok, no); }, 1500 + n * 1000);
+                    return;
+                }
+                toast(r.error);
+                no(r.error);
+            }
+            else
+                ok(r.ok);
+        }, function (e) { busy(0); toast(e.message); no(e); }); });
+    }
+    function doLogin() {
+        var er = Q('#lerr');
+        er.textContent = '';
+        if (!apiReady()) {
+            er.textContent = 'URL Web App belum diisi. Edit RAPOR_CONFIG.API_URL di bagian atas index.html.';
+            return;
+        }
+        var u = Q('#lu').value.trim(), p = Q('#lp').value;
+        if (!u || !p) {
+            er.textContent = 'Isi username dan password dulu ya';
+            return;
+        }
+        busy(1);
+        rpc('login', [u, p]).then(function (r) {
+            busy(0);
+            if (!r) {
+                er.textContent = 'Server tidak merespons. Pastikan Code.gs terbaru sudah di-deploy (Deploy > Manage deployments > Edit > New version).';
+                return;
+            }
+            if (r.error) {
+                er.textContent = r.error;
+                return;
+            }
+            T = r.ok.token;
+            U = r.ok.user;
+            return reload().then(function () {
+                Q('#login').style.display = 'none';
+                Q('#app').style.display = 'block';
+                brand(D.Ref);
+                Q('#who').textContent = (U.nama || U.username) + ' (' + U.role + ')';
+                buildMenu();
+                startNav();
+                go('dash');
+            }, function (x) {
+                T = null;
+                U = null;
+                Q('#login').style.display = 'flex';
+                Q('#app').style.display = 'none';
+                er.textContent = 'Gagal memuat data: ' + ((x && x.message) || x || 'tidak diketahui') + '. Coba masuk lagi.';
+            });
+        }, function (x) { busy(0); er.textContent = x.message; });
+    }
+    window.addEventListener('error', function (e) { var el = Q('#lerr'); if (el && Q('#login').style.display !== 'none')
+        el.textContent = 'Error skrip: ' + e.message; });
+    function brand(r) {
+        r = r || {};
+        var n = r.sekolah || '';
+        var lg = r.logo ? '<img src="' + img(r.logo) + '" alt="logo">' : '<span class="lg0">&#127979;</span>';
+        Q('#llogo').innerHTML = lg;
+        Q('#lsub').textContent = n || 'Masuk untuk melihat catatan tumbuh kembang ananda';
+        Q('#slogo').innerHTML = r.logo ? '<img src="' + img(r.logo) + '" alt="logo">' : '';
+        Q('#ssub').textContent = n;
+        document.title = (n ? n + ' - ' : '') + 'Rapor TK';
+        Q('#ptitle').textContent = n || 'Rapor TK';
+    }
+    function buildMenu() {
+        var adm = U.role === 'admin';
+        Q('#menu').innerHTML = '<a data-p="dash" onclick="go(\'dash\')">&#127968; Dashboard</a>' + GRP.map(function (g) {
+            var it = MENU.filter(function (m) { return g[1].indexOf(m[0]) >= 0 && (!m[3] || adm); });
+            return it.length ? '<div class="mg">' + g[0] + '</div>' + it.map(function (m) { return '<a data-p="' + m[0] + '" onclick="go(\'' + m[0] + '\')">' + m[1] + ' ' + m[2] + '</a>'; }).join('') : '';
+        }).join('');
+    }
+    function logout() {
+        T = null;
+        U = null;
+        D = {};
+        RP = {};
+        R = {};
+        CUR = '';
+        H = [];
+        window.H = H;
+        closeSide();
+        closePrint();
+        document.querySelectorAll('.ov').forEach(function (e) { return e.remove(); });
+        SUB = 0;
+        if (navOn) hReplace({ rtk: 1, login: 1 });
+        Q('#app').style.display = 'none';
+        Q('#main').innerHTML = '';
+        Q('#menu').innerHTML = '';
+        Q('#side').classList.remove('open');
+        Q('#login').style.display = 'flex';
+        Q('#lp').value = '';
+        Q('#lerr').textContent = '';
+    }
+    function reload() {
+        return __awaiter(this, void 0, void 0, function () { return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, api('all')];
+                case 1:
+                    D = _a.sent();
+                    return [2 /*return*/];
+            }
+        }); });
+    }
+    /* ---------- Navigasi & tombol Back (desktop + HP) ----------
+       Setiap pindah halaman / buka dialog / buka menu / buka pratinjau cetak = 1 entri riwayat,
+       sehingga tombol Back browser (atau gestur back di HP) menutup lapisan teratas lebih dulu,
+       lalu kembali ke halaman sebelumnya. Di Dashboard, Back dua kali baru keluar dari aplikasi. */
+    var LAYERS = [], SUB = 0, HQ = [], HB = false, HW = false, HT = 0, exitArm = 0, atBase = false, navOn = false;
+    var pg = function (p, sub) { return { rtk: 1, p: p, sub: sub || 0 }; };
+    function hpump() { var f = HQ.shift(); if (!f) { HB = false; return; } HB = true; f(); }
+    function hq(f) { HQ.push(f); if (!HB) hpump(); }
+    function hPush(st) { hq(function () { history.pushState(st, ''); hpump(); }); }
+    function hReplace(st) { hq(function () { history.replaceState(st, ''); hpump(); }); }
+    function hBack() { hq(function () { HW = true; HT = setTimeout(function () { if (HW) { HW = false; hpump(); } }, 700); history.back(); }); }
+    function pushLayer(kind, el) { LAYERS.push({ kind: kind, el: el || null }); hPush({ rtk: 1, layer: kind }); }
+    /* dipanggil saat UI menutup lapisan sendiri (tombol Batal/OK/Tutup) */
+    function layerClosed(match) {
+        for (var i = LAYERS.length - 1; i >= 0; i--) {
+            if (match(LAYERS[i])) {
+                var top = i === LAYERS.length - 1;
+                LAYERS.splice(i, 1);
+                if (top) hBack();
+                return;
+            }
+        }
+    }
+    function cancelBtn(el) { return el && el.querySelector('#mc,#ask_c,#inf_o'); }
+    function closeLayerUI(l) {
+        if (l.kind === 'ov') { var c = cancelBtn(l.el); if (c) c.click(); else l.el.remove(); }
+        else if (l.kind === 'print') Q('#print').style.display = 'none';
+        else if (l.kind === 'side') { Q('#side').classList.remove('open'); Q('#scrim').classList.remove('on'); }
+    }
+    function openSide() { if (Q('#side').classList.contains('open')) return; Q('#side').classList.add('open'); Q('#scrim').classList.add('on'); pushLayer('side'); }
+    function closeSide() {
+        if (!Q('#side').classList.contains('open')) return;
+        Q('#side').classList.remove('open'); Q('#scrim').classList.remove('on');
+        layerClosed(function (l) { return l.kind === 'side'; });
+    }
+    function toggleSide() { Q('#side').classList.contains('open') ? closeSide() : openSide(); }
+    function backTo(p) { if (SUB) { hBack(); go(p, true); } else go(p); }
+    function startNav() {
+        LAYERS = []; SUB = 0; exitArm = 0; atBase = false;
+        hReplace({ rtk: 1, base: 1 });
+        if (navOn) return;
+        navOn = true;
+        try { history.scrollRestoration = 'manual'; } catch (x) { }
+        new MutationObserver(function (ms) {
+            ms.forEach(function (m) {
+                [].forEach.call(m.addedNodes, function (n) { if (n.classList && n.classList.contains('ov') && T) pushLayer('ov', n); });
+                [].forEach.call(m.removedNodes, function (n) { if (n.classList && n.classList.contains('ov')) layerClosed(function (l) { return l.el === n; }); });
+            });
+        }).observe(document.body, { childList: true });
+        window.addEventListener('popstate', function (e) {
+            if (HW) { HW = false; clearTimeout(HT); hpump(); return; }
+            if (!T) return;
+            var st = e.state || {};
+            if (LAYERS.length) {
+                var top = LAYERS[LAYERS.length - 1];
+                if (top.kind === 'ov' && !cancelBtn(top.el)) { hPush({ rtk: 1, layer: 'ov' }); return; } /* dialog proses (mis. arsip) tidak bisa ditutup */
+                LAYERS.pop();
+                closeLayerUI(top);
+                return;
+            }
+            if (st.layer) { hBack(); return; }
+            if (st.base || !st.rtk) {
+                if (CUR !== 'dash' || SUB) go('dash', true);
+                atBase = true;
+                if (exitArm) return; /* sudah diperingatkan: biarkan browser keluar */
+                exitArm = 1;
+                toast('Tekan Back sekali lagi untuk keluar');
+                setTimeout(function () { exitArm = 0; if (atBase && T) { atBase = false; hPush(pg(CUR)); } }, 2500);
+                return;
+            }
+            if (st.p) {
+                var sub = st.sub || 0;
+                if (st.p !== CUR || SUB !== sub || SUB) go(st.p, true);
+            }
+        });
+        document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && LAYERS.length) history.back(); });
+        window.addEventListener('resize', fitPrint);
+    }
+    function fitPrint() { var w = 210 / 25.4 * 96, z = Math.min(1, (window.innerWidth - 16) / w); document.documentElement.style.setProperty('--pz', z); }
+    function go(p, fromPop) {
+        var top = LAYERS[LAYERS.length - 1], sideTop = !!(top && top.kind === 'side'), fresh = p !== CUR || !!SUB;
+        CUR = p; window.CUR = p; H = []; window.H = H; PBn = 0;
+        document.querySelectorAll('.menu a').forEach(function (a) { return a.classList.toggle('on', a.dataset.p === p); });
+        Q('#side').classList.remove('open'); Q('#scrim').classList.remove('on');
+        if (!fromPop && navOn) {
+            if (sideTop) { LAYERS.pop(); if (fresh) hReplace(pg(p)); else hBack(); }
+            else if (fresh) hPush(pg(p));
+        }
+        SUB = 0; atBase = false;
+        window.scrollTo(0, 0);
+        P[p]();
+    }
+    var set = function (t, h) { return Q('#main').innerHTML = "<h2>".concat(t, "</h2>") + h; };
+    function modal(title, body, save, wide) {
+        var _this = this;
+        var m = document.createElement('div');
+        m.className = 'ov';
+        m.innerHTML = "<div class=\"md".concat(wide ? ' wide' : '', "\"><h3>").concat(title, "</h3><div class=\"mb\">").concat(body, "</div><div class=\"mf\"><button class=\"btn gr\" id=\"mc\">Batal</button><button class=\"btn\" id=\"ms\">Simpan</button></div></div>");
+        document.body.appendChild(m);
+        m.querySelector('#mc').onclick = function () { return m.remove(); };
+        m.querySelector('#ms').onclick = function () { return __awaiter(_this, void 0, void 0, function () { var e_1; return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    _a.trys.push([0, 2, , 3]);
+                    return [4 /*yield*/, save()];
+                case 1:
+                    _a.sent();
+                    m.remove();
+                    return [3 /*break*/, 3];
+                case 2:
+                    e_1 = _a.sent();
+                    return [3 /*break*/, 3];
+                case 3: return [2 /*return*/];
+            }
+        }); }); };
+    }
+    function table(heads, rows) { return "<div class=\"tw\"><table><thead><tr>".concat(heads.map(function (h) { return "<th>".concat(h, "</th>"); }).join(''), "</tr></thead><tbody>").concat(rows.map(function (r) { return "<tr>".concat(r.map(function (c, ci) { return "<td data-l=\"".concat(esc(heads[ci] || ''), "\">").concat(c, "</td>"); }).join(''), "</tr>"); }).join('') || "<tr><td colspan=\"".concat(heads.length, "\" class=\"empty\">Belum ada data \uD83C\uDF31</td></tr>"), "</tbody></table></div>"); }
+    function fld(c, v) {
+        v = v !== null && v !== void 0 ? v : '';
+        var id = 'f_' + c.k;
+        if (c.t === 'select')
+            return "<label>".concat(c.l, "<select id=\"").concat(id, "\">").concat(c.o.map(function (o) { return "<option value=\"".concat(esc(o.v), "\" ").concat(String(o.v) === String(v) ? 'selected' : '', ">").concat(esc(o.l), "</option>"); }).join(''), "</select></label>");
+        if (c.t === 'multi') {
+            var s_1 = String(v).split(',');
+            return "<label>".concat(c.l, "</label><div class=\"chk\" id=\"").concat(id, "\">").concat(c.o.map(function (o) { return "<label class=\"pill\"><input type=\"checkbox\" value=\"".concat(esc(o.v), "\" ").concat(s_1.includes(String(o.v)) ? 'checked' : '', "> ").concat(esc(o.l), "</label>"); }).join(''), "</div>");
+        }
+        return "<label>".concat(c.l, "<input id=\"").concat(id, "\" type=\"").concat(c.t || 'text', "\" value=\"").concat(c.t === 'password' ? '' : esc(v), "\" ").concat(c.t === 'password' ? 'placeholder="kosongkan jika tidak diubah"' : '', "></label>");
+    }
+    var val = function (c) { var e = Q('#f_' + c.k); return c.t === 'multi' ? __spreadArray([], __read(e.querySelectorAll('input:checked')), false).map(function (i) { return i.value; }).join(',') : e.value; };
+    function openRow(sheet, cols, row, done) {
+        var _this = this;
+        row = row || {};
+        var wide = cols.length > 6;
+        modal(row.id ? 'Ubah data' : 'Tambah data', (wide ? '<div class="fg">' : '') + cols.map(function (c) { return fld(c, row[c.k]); }).join('') + (wide ? '</div>' : ''), function () { return __awaiter(_this, void 0, void 0, function () { var r; return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    r = __assign({}, row);
+                    cols.forEach(function (c) { return r[c.k] = val(c); });
+                    return [4 /*yield*/, api('save', { sheet: sheet, row: r })];
+                case 1:
+                    _a.sent();
+                    return [4 /*yield*/, reload()];
+                case 2:
+                    _a.sent();
+                    done();
+                    return [2 /*return*/];
+            }
+        }); }); }, wide);
+    }
+    function askText(title, label, val, multi) {
+        return new Promise(function (ok) {
+            var m = document.createElement('div');
+            m.className = 'ov';
+            var f = multi ? '<textarea id="ask_v" rows="4">' + esc(val || '') + '</textarea>' : '<input id="ask_v" value="' + esc(val || '') + '">';
+            m.innerHTML = '<div class="md" style="max-width:460px"><h3>' + title + '</h3><label>' + esc(label) + f + '</label><div class="mf"><button class="btn gr" id="ask_c">Batal</button><button class="btn" id="ask_o">OK</button></div></div>';
+            document.body.appendChild(m);
+            var i = m.querySelector('#ask_v');
+            i.focus();
+            var fin = function (v) { m.remove(); ok(v); }, go1 = function () { return fin(i.value.trim() || null); };
+            m.querySelector('#ask_c').onclick = function () { return fin(null); };
+            m.querySelector('#ask_o').onclick = go1;
+            i.onkeydown = function (e) { if (e.key === 'Escape')
+                fin(null);
+            else if (e.key === 'Enter' && (!multi || e.ctrlKey))
+                go1(); };
+        });
+    }
+    function askOk(title, msg, label, cls) {
+        return new Promise(function (ok) {
+            var m = document.createElement('div');
+            m.className = 'ov';
+            m.innerHTML = '<div class="md" style="max-width:440px"><h3>' + (cls === undefined ? '&#9888;&#65039; ' : '&#128221; ') + title + '</h3><p style="color:var(--mut);margin:6px 2px 4px">' + msg + '</p><div class="mf"><button class="btn gr" id="ask_c">Batal</button><button class="btn ' + (cls === undefined ? 'dg' : cls) + '" id="ask_o">' + (label || 'Ya, hapus') + '</button></div></div>';
+            document.body.appendChild(m);
+            m.querySelector('#ask_o').focus();
+            m.querySelector('#ask_c').onclick = function () { m.remove(); ok(false); };
+            m.querySelector('#ask_o').onclick = function () { m.remove(); ok(true); };
+        });
+    }
+    function info(title, html) { var m = document.createElement('div'); m.className = 'ov'; m.innerHTML = '<div class="md" style="max-width:480px"><h3>' + title + '</h3><div class="mb">' + html + '</div><div class="mf"><button class="btn" id="inf_o">OK</button></div></div>'; document.body.appendChild(m); m.querySelector('#inf_o').onclick = function () { return m.remove(); }; }
+    function remove(sheet, id, done) {
+        return __awaiter(this, void 0, void 0, function () { return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, askOk('Hapus data ini?', 'Data yang dihapus tidak dapat dikembalikan.')];
+                case 1:
+                    if (!(_a.sent()))
+                        return [2 /*return*/];
+                    return [4 /*yield*/, api('del', { sheet: sheet, id: id })];
+                case 2:
+                    _a.sent();
+                    return [4 /*yield*/, reload()];
+                case 3:
+                    _a.sent();
+                    done();
+                    return [2 /*return*/];
+            }
+        }); });
+    }
+    function crud(o) {
+        var redo = function () { return go(CUR); }, ro = o.ro;
+        var rows = o.rows.map(function (r) { return ro ? o.cell(r) : __spreadArray(__spreadArray([], __read(o.cell(r)), false), ["<button class=\"ib\" onclick=\"".concat(fn(function () { return openRow(o.sheet, o.cols, r, redo); }), "\">\u270F\uFE0F</button>") + (o.del === false ? '' : "<button class=\"ib\" onclick=\"".concat(fn(function () { return remove(o.sheet, r.id, redo); }), "\">\uD83D\uDDD1\uFE0F</button>"))], false); });
+        return "".concat(o.add === false ? '' : "<button class=\"btn lf\" onclick=\"".concat(fn(function () { return openRow(o.sheet, o.cols, null, redo); }), "\">\u2795 Tambah</button>")).concat(table(ro ? o.heads : __spreadArray(__spreadArray([], __read(o.heads), false), ['Aksi'], false), rows));
+    }
+    var isL = function (k) { return /lulus/i.test((k && k.nama) || ''); };
+    var aktifK = function () { return D.Kelompok.filter(function (k) { return !isL(k); }); };
+    var aktifS = function () { return D.Siswa.filter(function (s) { var k = D.Kelompok.find(function (x) { return x.id == s.kelompok; }); return !!k && !isL(k); }); };
+    var PR = {};
+    var per = function (s) { var r = PR[key(s)] || {}; var g = function (f) { return (r[f] !== undefined && r[f] !== '') ? r[f] : (s[f] !== undefined ? s[f] : ''); }; return { tb: g('tb'), bb: g('bb'), sakit: g('sakit'), izin: g('izin'), alpa: g('alpa') }; };
+    var nick = function (s) { return s.panggilan || s.nama; };
+    var kn = function (id) { return (D.Kelompok.find(function (k) { return k.id == id; }) || {}).nama || '-'; };
+    var kOpts = function () { return D.Kelompok.map(function (k) { return ({ v: k.id, l: k.nama }); }); };
+    function curK(key, all, nl) { var L = nl ? aktifK() : D.Kelompok; if (FS[key] === undefined || (!all && (!FS[key] || !L.some(function (k) { return k.id == FS[key]; }))))
+        FS[key] = all ? '' : (L[0] || {}).id || ''; return FS[key]; }
+    function selK(key, all, nl) { var v = curK(key, all, nl), L = nl ? aktifK() : D.Kelompok; return "<select class=\"sel\" onchange=\"FS.".concat(key, "=this.value;go(CUR)\">").concat(all ? "<option value=\"\">Semua kelompok</option>" : '').concat(L.map(function (k) { return "<option value=\"".concat(esc(k.id), "\" ").concat(k.id == v ? 'selected' : '', ">").concat(esc(k.nama), "</option>"); }).join(''), "</select>"); }
+    function upImgFile(f, png) {
+        return new Promise(function (ok, no) {
+            var r = new FileReader();
+            r.onload = function () {
+                var im = new Image();
+                im.onload = function () {
+                    var k = Math.min(1, 1000 / Math.max(im.width, im.height)), c = document.createElement('canvas');
+                    c.width = im.width * k;
+                    c.height = im.height * k;
+                    var x = c.getContext('2d');
+                    if (!png) {
+                        x.fillStyle = '#fff';
+                        x.fillRect(0, 0, c.width, c.height);
+                    }
+                    x.drawImage(im, 0, 0, c.width, c.height);
+                    api('upload', { name: Date.now() + (png ? '.png' : '.jpg'), mime: png ? 'image/png' : 'image/jpeg', b64: c.toDataURL(png ? 'image/png' : 'image/jpeg', .82).split(',')[1] }).then(ok, no);
+                };
+                im.src = r.result;
+            };
+            r.readAsDataURL(f);
+        });
+    }
+    var P = {};
+    /* ---------- master data ---------- */
+    P.dash = function () { return __awaiter(_this, void 0, void 0, function () {
+        var X, adm, st, tot, done, pct, pg, warn;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, api('rapor')];
+                case 1:
+                    RP = _a.sent();
+                    X = D.Ref, adm = U.role === 'admin';
+                    st = function (ic, n, l, c) { return '<div class="st ' + c + '"><div class="si">' + ic + '</div><div><b>' + n + '</b><span>' + l + '</span></div></div>'; };
+                    tot = aktifS().length, done = aktifS().filter(function (s) { return RP[key(s)]; }).length, pct = tot ? Math.round(done * 100 / tot) : 0;
+                    pg = aktifK().map(function (k) {
+                        var L = aktifS().filter(function (s) { return s.kelompok == k.id; }), d = L.filter(function (s) { return RP[key(s)]; }).length, p = L.length ? Math.round(d * 100 / L.length) : 0;
+                        return '<div class="pg"><div class="pgh"><b>' + esc(k.nama) + '</b><span>' + d + ' / ' + L.length + ' siswa &middot; ' + p + '%</span></div><div class="bar"><i style="width:' + p + '%"></i></div></div>';
+                    }).join('') || '<p class="empty">Belum ada kelompok.</p>';
+                    warn = adm && !X.sekolah ? '<div class="card c3"><b>&#128161; Lengkapi dulu Data Referensial</b> (nama sekolah, logo, kepala sekolah, tahun pelajaran) agar rapor tercetak lengkap. <button class="btn" style="margin:8px 0 0 8px" onclick="go(\'ref\')">Buka Data Referensial</button></div>' : '';
+                    set('Dashboard', '<div class="card hero"><div><h3>Selamat datang, ' + esc(U.nama || U.username) + '!</h3><p>' + esc(X.sekolah || 'Rapor TK') + ' &middot; Tahun Pelajaran <b>' + esc(X.tahun || '-') + '</b> &middot; Semester <b>' + esc(X.semester || '-') + '</b></p></div></div>' + warn +
+                        '<div class="stg">' + st('&#129490;', tot, 'Siswa aktif', 'a') + st('&#127979;', aktifK().length, 'Kelompok', 'b') + (adm ? st('&#128105;&#8205;&#127979;', D.Users.length, 'Guru', 'c') : '') + st('&#9917;', D.Ekstra.length, 'Ekstrakurikuler', 'd') + st('&#9989;', pct + '%', 'Rapor terisi (' + done + '/' + tot + ')', 'e') + '</div>' +
+                        '<div class="card c1"><h3>&#128202; Progres Pengisian Rapor</h3>' + pg + '</div>' +
+                        '<div class="card c2"><h3>&#9889; Pintasan</h3><button class="btn" onclick="go(\'input\')">&#9999;&#65039; Input Rapor</button><button class="btn" onclick="go(\'cetak\')">&#128424;&#65039; Cetak Rapor</button><button class="btn gr" onclick="go(\'siswa\')">&#129490; Data Siswa</button>' + (adm ? '<button class="btn gr" onclick="go(\'ref\')">&#127991;&#65039; Data Referensial</button>' : '') + '</div>');
+                    return [2 /*return*/];
+            }
+        });
+    }); };
+    P.guru = function () { return set('Data Guru', crud({ sheet: 'Users', rows: D.Users, heads: ['Nama', 'Kelas diampu', 'Username'], cols: [{ k: 'nama', l: 'Nama Guru' }, { k: 'kelas', l: 'Kelas yang diampu', t: 'multi', o: kOpts() }, { k: 'username', l: 'Username' }, { k: 'password', l: 'Password (awal: guru123)', t: 'password' }], cell: function (g) { return [esc(g.nama), String(g.kelas || '').split(',').filter(String).map(kn).join(', ') || '-', esc(g.username)]; } })); };
+    P.siswa = function () {
+        var adm = U.role === 'admin', f = curK('siswa', true);
+        var cols = [{ k: 'nama', l: 'Nama Lengkap' }, { k: 'panggilan', l: 'Nama Panggilan' }, { k: 'tempat_lahir', l: 'Tempat Lahir' }, { k: 'tgl_lahir', l: 'Tanggal Lahir', t: 'date' }, { k: 'jk', l: 'Jenis Kelamin', t: 'select', o: [{ v: 'Laki-laki', l: 'Laki-laki' }, { v: 'Perempuan', l: 'Perempuan' }] }, { k: 'anak_ke', l: 'Anak ke', t: 'number' }, { k: 'jml_saudara', l: 'Jumlah Saudara', t: 'number' }, { k: 'tgl_masuk', l: 'Tanggal Masuk', t: 'date' }, { k: 'kelompok', l: 'Kelompok', t: 'select', o: kOpts() }, { k: 'ayah', l: 'Nama Ayah' }, { k: 'ibu', l: 'Nama Ibu' }, { k: 'kerja_ayah', l: 'Pekerjaan Ayah' }, { k: 'kerja_ibu', l: 'Pekerjaan Ibu' }];
+        var tools = adm ? "<button class=\"btn gr\" onclick=\"".concat(fn(dlTemplate), "\">&#11015;&#65039; Template Excel</button><label class=\"btn gr\" style=\"display:inline-block;cursor:pointer\">&#11014;&#65039; Impor Excel<input type=\"file\" accept=\".xlsx\" hidden onchange=\"").concat(fn(imporSiswa), "\"></label>") : '';
+        set('Data Siswa', selK('siswa', true) + tools + crud({ sheet: 'Siswa', cols: cols, rows: D.Siswa.filter(function (s) { return !f || s.kelompok == f; }), ro: !adm, add: adm, del: adm, heads: ['Nama', 'L/P', 'Tempat, Tanggal Lahir', 'Kelompok', 'Orang Tua'],
+            cell: function (s) { return [esc(s.nama) + (s.panggilan ? '<br><small style="color:var(--mut)">' + esc(s.panggilan) + '</small>' : ''), s.jk === 'Laki-laki' ? 'L' : (s.jk === 'Perempuan' ? 'P' : '-'), esc(s.tempat_lahir || '-') + (s.tgl_lahir ? ', ' + tgl(s.tgl_lahir) : ''), esc(kn(s.kelompok)), esc([s.ayah, s.ibu].filter(Boolean).join(' / ') || '-')]; } }));
+    };
+    P.kel = function () { var tipL = D.Kelompok.some(isL) ? '' : "<div class=\"card c3\"><b>&#127891; Kelompok Lulus</b><p style=\"margin:6px 0\">Siswa yang dipindahkan ke kelompok <b>Lulus</b> tidak tampil di Ekstrakurikuler, Input TB &amp; BB, Input Kehadiran, Input Rapor, dan Cetak Rapor.</p><button class=\"btn\" onclick=\"".concat(fn(function () { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, api('save', { sheet: 'Kelompok', row: { nama: 'Lulus', fase: '-' } })];
+            case 1:
+                _a.sent();
+                return [4 /*yield*/, reload()];
+            case 2:
+                _a.sent();
+                go('kel');
+                return [2 /*return*/];
+        }
+    }); }); }), "\">Buat kelompok Lulus</button></div>"); set('Kelompok & Ekstra', tipL + "<h3>\uD83C\uDFEB Kelompok Belajar</h3>" + crud({ sheet: 'Kelompok', rows: D.Kelompok, heads: ['Kelompok', 'Fase'], cols: [{ k: 'nama', l: 'Nama Kelompok (mis. Kelompok A)' }, { k: 'fase', l: 'Fase (mis. Fondasi)' }], cell: function (k) { return [esc(k.nama), esc(k.fase || 'Fondasi')]; } }) + "<h3 style=\"margin-top:24px\">\u26BD Ekstrakurikuler</h3>" + crud({ sheet: 'Ekstra', rows: D.Ekstra, heads: ['Nama Ekstra'], cols: [{ k: 'nama', l: 'Nama Ekstra' }], cell: function (e) { return [esc(e.nama)]; } })); };
+    P.ref = function () {
+        var X = D.Ref;
+        var im = function (k, l) { return "<div class=\"up\"><img id=\"p_".concat(k, "\" src=\"").concat(img(X[k]), "\" alt=\"\"><div><b>").concat(l, "</b><input type=\"file\" accept=\"image/*\" onchange=\"").concat(fn(function (el) { return __awaiter(_this, void 0, void 0, function () { var _a, _b; return __generator(this, function (_c) {
+            switch (_c.label) {
+                case 0:
+                    if (!el.files[0])
+                        return [2 /*return*/];
+                    _a = X;
+                    _b = k;
+                    return [4 /*yield*/, upImgFile(el.files[0], true)];
+                case 1:
+                    _a[_b] = _c.sent();
+                    Q('#p_' + k).src = img(X[k]);
+                    return [2 /*return*/];
+            }
+        }); }); }), "\"></div></div>"); };
+        var tx = function (k, l, t) { return "<label>".concat(l, "<input id=\"r_").concat(k, "\" type=\"").concat(t || 'text', "\" value=\"").concat(esc(X[k]), "\"></label>"); };
+        set('Data Referensial', "<div class=\"card c1\"><h3>Identitas Sekolah</h3><div class=\"row\">".concat(tx('sekolah', 'Nama Sekolah')).concat(tx('alamat', 'Alamat Sekolah')).concat(tx('kepsek', 'Nama Kepala Sekolah')).concat(tx('nip', 'NIP Kepala Sekolah'), "</div>").concat(im('logo', 'Logo Sekolah'), "</div>\n <div class=\"card c2\"><h3>Penanggalan Rapor</h3><div class=\"row\">").concat(tx('tahun', 'Tahun Pelajaran (2026/2027)'), "<label>Semester<select id=\"r_semester\"><option ").concat(X.semester === 'Ganjil' ? 'selected' : '', ">Ganjil</option><option ").concat(X.semester === 'Genap' ? 'selected' : '', ">Genap</option></select></label>").concat(tx('tempat', 'Tempat penerbitan rapor')).concat(tx('tgl', 'Tanggal rapor', 'date'), "</div></div>\n <div class=\"card c3\"><h3>Tanda Tangan</h3>").concat(im('ttdKs', 'Tanda tangan Kepala Sekolah')).concat(im('ttdGuru', 'Tanda tangan Guru Kelas'), "</div>\n <button class=\"btn lf\" onclick=\"").concat(fn(function () { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    ['sekolah', 'alamat', 'kepsek', 'nip', 'tahun', 'semester', 'tempat', 'tgl'].forEach(function (k) { return X[k] = Q('#r_' + k).value; });
+                    return [4 /*yield*/, api('saveRef', X)];
+                case 1:
+                    _a.sent();
+                    toast('Tersimpan \u2714');
+                    return [2 /*return*/];
+            }
+        }); }); }), "\">\uD83D\uDCBE Simpan</button>"));
+    };
+    P.cp = function () {
+        var k = curK('cp'), rows = D.CP.filter(function (c) { return c.kelompok == k; }), els = __spreadArray([], __read(new Set(rows.map(function (r) { return r.elemen; }))), false), redo = function () { return go('cp'); };
+        var addCp = function (el, old) { return __awaiter(_this, void 0, void 0, function () { var t; return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, askText(old ? 'Ubah Capaian Pembelajaran' : 'Tambah Capaian Pembelajaran', 'Elemen: ' + el, old ? old.cp : '', true)];
+                case 1:
+                    t = _a.sent();
+                    if (!t)
+                        return [2 /*return*/];
+                    return [4 /*yield*/, api('save', { sheet: 'CP', row: __assign(__assign({}, (old || {})), { kelompok: k, elemen: el, cp: t }) })];
+                case 2:
+                    _a.sent();
+                    return [4 /*yield*/, reload()];
+                case 3:
+                    _a.sent();
+                    redo();
+                    return [2 /*return*/];
+            }
+        }); }); };
+        set('Capaian Pembelajaran', selK('cp') + (k ? "<button class=\"btn lf\" onclick=\"".concat(fn(function () { return __awaiter(_this, void 0, void 0, function () { var e; return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, askText('Tambah Elemen', 'Nama elemen (mis. Nilai Agama dan Budi Pekerti)', '')];
+                case 1:
+                    e = _a.sent();
+                    if (e)
+                        addCp(e);
+                    return [2 /*return*/];
+            }
+        }); }); }), "\">\u2795 Tambah Elemen</button>") : '<p>Buat kelompok dulu di menu Kelompok & Ekstra.</p>') +
+            els.map(function (e) { return "<div class=\"card c1\"><h3>".concat(esc(e), "</h3><ul>").concat(rows.filter(function (r) { return r.elemen === e; }).map(function (r) { return "<li>".concat(esc(r.cp), " <button class=\"ib\" onclick=\"").concat(fn(function () { return addCp(e, r); }), "\">\u270F\uFE0F</button><button class=\"ib\" onclick=\"").concat(fn(function () { return remove('CP', r.id, redo); }), "\">\uD83D\uDDD1\uFE0F</button></li>"); }).join(''), "</ul>\n <button class=\"btn gr\" onclick=\"").concat(fn(function () { return addCp(e); }), "\">\u2795 CP</button><button class=\"btn gr\" onclick=\"").concat(fn(function () { return __awaiter(_this, void 0, void 0, function () {
+                var _a, _b, r, e_2_1;
+                var e_2, _c;
+                return __generator(this, function (_d) {
+                    switch (_d.label) {
+                        case 0: return [4 /*yield*/, askOk('Hapus elemen ini?', 'Semua Capaian Pembelajaran di dalam elemen ini ikut terhapus.')];
+                        case 1:
+                            if (!(_d.sent()))
+                                return [2 /*return*/];
+                            _d.label = 2;
+                        case 2:
+                            _d.trys.push([2, 7, 8, 9]);
+                            _a = __values(rows.filter(function (r) { return r.elemen === e; })), _b = _a.next();
+                            _d.label = 3;
+                        case 3:
+                            if (!!_b.done) return [3 /*break*/, 6];
+                            r = _b.value;
+                            return [4 /*yield*/, api('del', { sheet: 'CP', id: r.id })];
+                        case 4:
+                            _d.sent();
+                            _d.label = 5;
+                        case 5:
+                            _b = _a.next();
+                            return [3 /*break*/, 3];
+                        case 6: return [3 /*break*/, 9];
+                        case 7:
+                            e_2_1 = _d.sent();
+                            e_2 = { error: e_2_1 };
+                            return [3 /*break*/, 9];
+                        case 8:
+                            try {
+                                if (_b && !_b.done && (_c = _a.return)) _c.call(_a);
+                            }
+                            finally { if (e_2) throw e_2.error; }
+                            return [7 /*endfinally*/];
+                        case 9: return [4 /*yield*/, reload()];
+                        case 10:
+                            _d.sent();
+                            redo();
+                            return [2 /*return*/];
+                    }
+                });
+            }); }), "\">\uD83D\uDDD1\uFE0F Hapus elemen</button></div>"); }).join(''));
+    };
+    P.kokur = function () {
+        var k = curK('kokur'), r = D.Kokur.find(function (x) { return x.kelompok == k; }) || {}, s = String(r.dimensi || '').split('|');
+        set('Kokurikuler', selK('kokur') + (k ? "<div class=\"card c3\"><h3>Dimensi Profil Lulusan (centang yang dipakai)</h3><div class=\"chk\" id=\"dm\">".concat(DIM.map(function (d) { return "<label class=\"pill\"><input type=\"checkbox\" value=\"".concat(esc(d), "\" ").concat(s.includes(d) ? 'checked' : '', "> ").concat(d, "</label>"); }).join(''), "</div>\n <label>Kegiatan Kokurikuler<textarea id=\"kg\" placeholder=\"Judul / uraian kegiatan\">").concat(esc(r.kegiatan), "</textarea></label>\n <button class=\"btn lf\" onclick=\"").concat(fn(function () { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, api('save', { sheet: 'Kokur', row: { id: 'ko_' + k, kelompok: k, dimensi: __spreadArray([], __read(document.querySelectorAll('#dm input:checked')), false).map(function (i) { return i.value; }).join('|'), kegiatan: Q('#kg').value } })];
+                case 1:
+                    _a.sent();
+                    return [4 /*yield*/, reload()];
+                case 2:
+                    _a.sent();
+                    toast('Tersimpan \u2714');
+                    return [2 /*return*/];
+            }
+        }); }); }), "\">\uD83D\uDCBE Simpan</button></div>") : '<p>Buat kelompok dulu.</p>'));
+    };
+    P.ekstra = function () {
+        var k = curK('ekstra', false, true), op = function (v) { return "<option value=\"\">\u2014 tidak ada \u2014</option>" + D.Ekstra.map(function (e) { return "<option value=\"".concat(e.id, "\" ").concat(e.id == v ? 'selected' : '', ">").concat(esc(e.nama), "</option>"); }).join(''); };
+        set('Ekstrakurikuler', selK('ekstra', false, true) + table(['Siswa', 'Ekstra Wajib', 'Ekstra Pilihan'], aktifS().filter(function (s) { return s.kelompok == k; }).map(function (s) {
+            var e = D.EkstraSiswa.find(function (x) { return x.siswa == s.id; }) || {};
+            var sv = function (el) { var tr = el.closest('tr'), _a = __read(tr.querySelectorAll('select'), 2), w = _a[0], p = _a[1]; var row = { id: 'es_' + s.id, siswa: s.id, wajib: w.value, pilihan: p.value }; api('save', { sheet: 'EkstraSiswa', row: row }).then(function () { D.EkstraSiswa = D.EkstraSiswa.filter(function (x) { return x.siswa != s.id; }).concat(row); toast('Tersimpan \u2714'); }); };
+            return [esc(s.nama), "<select onchange=\"".concat(fn(sv), "\">").concat(op(e.wajib), "</select>"), "<select onchange=\"".concat(fn(sv), "\">").concat(op(e.pilihan), "</select>")];
+        })));
+    };
+    /* ---------- input rapor ---------- */
+    var key = function (s) { return "".concat(s.id, "|").concat(D.Ref.tahun || '', "|").concat(D.Ref.semester || ''); };
+    P.input = function () { return __awaiter(_this, void 0, void 0, function () {
+        var k;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, api('rapor')];
+                case 1:
+                    RP = _a.sent();
+                    k = curK('input', false, true);
+                    set('Input Rapor', selK('input', false, true) + table(['Nama Siswa', 'Status', 'Rapor'], aktifS().filter(function (s) { return s.kelompok == k; }).map(function (s) { return [esc(s.nama), RP[key(s)] ? '\u2705 Terisi' : '\u23f3 Belum', "<button class=\"btn\" style=\"margin:0\" onclick=\"".concat(fn(function () { return form(s); }), "\">\uD83D\uDCDD Input</button>")]; })));
+                    return [2 /*return*/];
+            }
+        });
+    }); };
+    /* ---------- isi otomatis: Rencana semester depan & Rekomendasi orang tua dari centangan CP ---------- */
+    var ELS = [], CPS = [];
+    function cpTxt(t) { t = String(t == null ? '' : t).trim().replace(/^dalam\s+/i, ''); while (t && /[.\s]/.test(t.slice(-1)))
+        t = t.slice(0, -1); return t; }
+    function joinCp(a) { return a.length < 2 ? a.join('') : a.slice(0, -1).join(', ') + ' dan ' + a[a.length - 1]; }
+    function genAuto(e) {
+        var by = [[], [], [], []];
+        CPS.filter(function (c) { return c.elemen === e && R.cp && by[R.cp[c.id]]; }).forEach(function (c) { return by[R.cp[c.id]].push(cpTxt(c.cp)); });
+        var bagus = by[0].concat(by[1]), r = [], k = [];
+        if (by[3].length) {
+            r.push('Memberikan latihan dan stimulasi secara rutin agar ananda semakin mampu dalam ' + joinCp(by[3]) + '.');
+            k.push('Mohon Ayah/Bunda melatih ananda secara rutin di rumah dalam ' + joinCp(by[3]) + ' dengan sabar dan penuh kasih sayang.');
+        }
+        if (by[2].length) {
+            r.push('Meningkatkan kemampuan ananda dalam ' + joinCp(by[2]) + ' melalui kegiatan bermain yang bervariasi.');
+            k.push('Mohon Ayah/Bunda mendampingi ananda berlatih dalam ' + joinCp(by[2]) + ' melalui kegiatan sehari-hari di rumah.');
+        }
+        if (bagus.length) {
+            r.push('Mempertahankan dan mengembangkan kemampuan ananda dalam ' + joinCp(bagus) + '.');
+            k.push('Mohon Ayah/Bunda terus mendukung dan membiasakan ananda dalam ' + joinCp(bagus) + ' di rumah.');
+        }
+        return { rencana: r.join(' '), rekom: k.join(' ') };
+    }
+    var isAuto = function (o, f) { return o[f] === undefined || o[f] === '' || o[f + '_m'] === 0; };
+    function autoEl(e, force, quiet) {
+        R.el = R.el || {};
+        var o = R.el[e] = R.el[e] || {}, g = genAuto(e), ei = ELS.indexOf(e);
+        [['rencana', 'rc'], ['rekom', 'rk']].forEach(function (p) { if (force || isAuto(o, p[0])) {
+            o[p[0]] = g[p[0]];
+            o[p[0] + '_m'] = 0;
+            if (!quiet) {
+                var t = Q('#' + p[1] + '_' + ei);
+                if (t)
+                    t.value = g[p[0]];
+            }
+        } });
+    }
+    function form(s) {
+        var _this = this;
+        if (!SUB) { SUB = 1; hPush(pg(CUR, 1)); }
+        R = JSON.parse(JSON.stringify(RP[key(s)] || {}));
+        R.cp = R.cp || {};
+        PBn = 0;
+        var cps = D.CP.filter(function (c) { return c.kelompok == s.kelompok; }), els = __spreadArray([], __read(new Set(cps.map(function (c) { return c.elemen; }))), false);
+        ELS = els;
+        CPS = cps;
+        els.forEach(function (e) { return autoEl(e, false, true); });
+        var kk = D.Kokur.find(function (x) { return x.kelompok == s.kelompok; }), dims = kk ? String(kk.dimensi).split('|').filter(String) : [];
+        var es = D.EkstraSiswa.find(function (x) { return x.siswa == s.id; }) || {}, ex = [[es.wajib, 'Wajib'], [es.pilihan, 'Pilihan']].filter(function (x) { return x[0]; }).map(function (x) { return [D.Ekstra.find(function (e) { return e.id == x[0]; }), x[1]]; }).filter(function (x) { return x[0]; });
+        var ta = function (m, e, f, l, v, id) { return "<label>".concat(l, "<textarea ").concat(id ? 'id="' + id + '" ' : '', "data-m=\"").concat(m, "\" data-e=\"").concat(esc(e), "\" data-f=\"").concat(f, "\">").concat(esc(v), "</textarea></label>"); };
+        var g = function (m, e, f) { return ((R[m] || {})[e] || {})[f] || ''; };
+        var intra = els.map(function (e, ei) { return "<div class=\"card c1\"><div class=\"eh\">".concat(esc(e), "</div>").concat(cps.filter(function (c) { return c.elemen === e; }).map(function (c) { return "<div><b>".concat(esc(c.cp), "</b><div class=\"lv\">").concat(LV.map(function (l, i) { return "<label class=\"pill\"><input type=\"radio\" name=\"cp_".concat(c.id, "\" data-m=\"cp\" data-e=\"").concat(c.id, "\" value=\"").concat(i, "\" ").concat(R.cp[c.id] === i ? 'checked' : '', "> ").concat(l, "</label>"); }).join(''), "</div></div>"); }).join(''), "\n <div style=\"margin:4px 0 8px\"><small style=\"color:var(--mut);font-weight:600\">Rencana dan rekomendasi terisi otomatis dari penilaian CP di atas, dan tetap bisa Anda ubah.</small> <button class=\"btn gr\" style=\"margin:4px 0 0 6px;padding:5px 12px;font-size:12px\" onclick=\"").concat(fn(function () { return autoEl(e, true); }), "\">&#128260; Isi ulang otomatis</button></div>").concat(ta('el', e, 'rencana', 'Rencana semester depan', g('el', e, 'rencana'), 'rc_' + ei)).concat(ta('el', e, 'rekom', 'Rekomendasi orang tua', g('el', e, 'rekom'), 'rk_' + ei), "<b>Foto kegiatan (maks 3)</b>").concat(photoBox('el', e, 3), "</div>"); }).join('') || '<p>CP untuk kelompok ini belum diatur.</p>';
+        var kokur = kk ? "<div class=\"card c3\"><div class=\"eh\">".concat(esc(kk.kegiatan || 'Kegiatan Kokurikuler'), "</div>").concat(dims.map(function (d) { return ta('ko', d, 'd', d, g('ko', d, 'd')); }).join(''), "<b>Foto kegiatan (maks 3)</b>").concat(photoBox('ko', '_', 3), "</div>") : '<p>Kokurikuler kelompok ini belum diatur.</p>';
+        var eks = ex.map(function (_a) {
+            var _b = __read(_a, 2), e = _b[0], t = _b[1];
+            return "<div class=\"card c2\"><div class=\"eh\">".concat(esc(e.nama), " (").concat(t, ")</div>").concat(ta('ex', e.id, 'd', 'Deskripsi', g('ex', e.id, 'd')), "<b>Foto (maks 2)</b>").concat(photoBox('ex', e.id, 2), "</div>");
+        }).join('') || '<p>Siswa belum memilih ekstra.</p>';
+        Q('#main').innerHTML = "<h2>\uD83D\uDCDD ".concat(esc(s.nama), "</h2><p>").concat(esc(kn(s.kelompok)), " \u00B7 ").concat(esc(D.Ref.tahun || ''), " ").concat(esc(D.Ref.semester || ''), "</p><div class=\"tabs\">").concat(['Intrakurikuler', 'Kokurikuler', 'Ekstrakurikuler'].map(function (t, i) { return "<button class=\"btn ".concat(i ? 'gr' : '', "\" onclick=\"").concat(fn(function (el) { document.querySelectorAll('.tp').forEach(function (p, j) { return p.style.display = j === i ? '' : 'none'; }); el.parentNode.querySelectorAll('.btn').forEach(function (b, j) { return b.classList.toggle('gr', j !== i); }); }), "\">").concat(t, "</button>"); }).join(''), "</div>\n <div class=\"tp\">").concat(intra, "</div><div class=\"tp\" style=\"display:none\">").concat(kokur, "</div><div class=\"tp\" style=\"display:none\">").concat(eks, "</div>\n <button class=\"btn lf\" onclick=\"").concat(fn(function () { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, api('saveRapor', { key: key(s), data: R })];
+                case 1:
+                    _a.sent();
+                    RP[key(s)] = R;
+                    toast('Rapor tersimpan \u2714');
+                    return [2 /*return*/];
+            }
+        }); }); }), "\">\uD83D\uDCBE Simpan Rapor</button><button class=\"btn gr\" onclick=\"backTo('input')\">\u2190 Kembali</button>");
+    }
+    document.addEventListener('input', function (e) { var t = e.target, m = t.dataset && t.dataset.m; if (!m)
+        return; if (m === 'cp') {
+        R.cp[t.dataset.e] = +t.value;
+        var c = CPS.find(function (x) { return x.id == t.dataset.e; });
+        if (c)
+            autoEl(c.elemen, false);
+        return;
+    } R[m] = R[m] || {}; var o = R[m][t.dataset.e] = R[m][t.dataset.e] || {}; o[t.dataset.f] = t.value; if (t.dataset.f === 'rencana' || t.dataset.f === 'rekom')
+        o[t.dataset.f + '_m'] = 1; });
+    function photoBox(m, e, max) { var id = 'pb' + (PBn++); return "<div class=\"photos\" id=\"".concat(id, "\">").concat(photoIn(id, m, e, max), "</div>"); }
+    function photoIn(id, m, e, max) {
+        var _this = this;
+        var arr = (((R[m] || {})[e]) || {}).foto || [];
+        return arr.map(function (f, i) { return "<div class=\"ph\"><img src=\"".concat(img(f), "\"><button class=\"x\" onclick=\"").concat(fn(function () { arr.splice(i, 1); Q('#' + id).innerHTML = photoIn(id, m, e, max); }), "\">\u00D7</button></div>"); }).join('') + (arr.length < max ? "<label class=\"addph\">\uD83D\uDCF7<small>Tambah (".concat(arr.length, "/").concat(max, ")</small><input type=\"file\" accept=\"image/*\" hidden onchange=\"").concat(fn(function (el) { return __awaiter(_this, void 0, void 0, function () { var f, fid; return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    f = el.files[0];
+                    if (!f)
+                        return [2 /*return*/];
+                    return [4 /*yield*/, upImgFile(f)];
+                case 1:
+                    fid = _a.sent();
+                    R[m] = R[m] || {};
+                    R[m][e] = R[m][e] || {};
+                    (R[m][e].foto = R[m][e].foto || []).push(fid);
+                    Q('#' + id).innerHTML = photoIn(id, m, e, max);
+                    return [2 /*return*/];
+            }
+        }); }); }), "\"></label>") : '');
+    }
+    /* ---------- cetak ---------- */
+    P.cetak = function () { return __awaiter(_this, void 0, void 0, function () {
+        var rr, k, L;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, Promise.all([api('rapor'), api('periodik')])];
+                case 1:
+                    rr = _a.sent();
+                    RP = rr[0];
+                    PR = rr[1];
+                    k = curK('cetak', false, true);
+                    L = aktifS().filter(function (s) { return s.kelompok == k; });
+                    set('Cetak Rapor', selK('cetak', false, true) + "<button class=\"btn gr\" onclick=\"".concat(fn(function () { return arsipkan(L, k); }), "\">&#128230; Arsipkan rapor</button><button class=\"btn lf\" onclick=\"").concat(fn(function () { return showPrint(L); }), "\">\uD83D\uDDA8\uFE0F Cetak semua di kelompok ini</button>") + table(['Nama Siswa', 'Status', 'Cetak'], L.map(function (s) { return [esc(s.nama), RP[key(s)] ? '\u2705 Terisi' : '\u23f3 Belum diisi', "<button class=\"btn\" style=\"margin:0\" onclick=\"".concat(fn(function () { return showPrint([s]); }), "\">\uD83D\uDDA8\uFE0F Cetak</button>")]; })));
+                    return [2 /*return*/];
+            }
+        });
+    }); };
+    function arsipkan(L, k) {
+        return __awaiter(this, void 0, void 0, function () {
+            var X, m, f, okN, tot, gagal, x_2, i, r, x_3;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        if (!L.length)
+                            return [2 /*return*/, toast('Tidak ada siswa di kelompok ini')];
+                        X = D.Ref;
+                        return [4 /*yield*/, askOk('Arsipkan rapor', 'PDF rapor <b>' + L.length + ' siswa</b> kelompok <b>' + esc(kn(k)) + '</b> (Tahun Pelajaran ' + esc(X.tahun || '-') + ', Semester ' + esc(X.semester || '-') + ') akan disimpan ke Google Drive pada folder <b>Arsip Rapor</b>. File lama dengan nama yang sama akan diganti dengan yang terbaru. Proses memerlukan beberapa detik per siswa.', 'Ya, arsipkan', '')];
+                    case 1:
+                        if (!(_a.sent()))
+                            return [2 /*return*/];
+                        m = document.createElement('div');
+                        m.className = 'ov';
+                        m.innerHTML = '<div class="md" style="max-width:440px"><h3>&#128230; Mengarsipkan rapor...</h3><p id="ap_t" style="margin:8px 2px;color:var(--mut)">Menyiapkan folder...</p><div class="bar"><i id="ap_b" style="width:0%"></i></div><p style="font-size:12.5px;color:var(--mut)">Jangan tutup halaman ini sampai selesai.</p></div>';
+                        document.body.appendChild(m);
+                        okN = 0, tot = 0;
+                        gagal = [];
+                        _a.label = 2;
+                    case 2:
+                        _a.trys.push([2, 4, , 5]);
+                        return [4 /*yield*/, api('arsipMulai', { kelompok: k })];
+                    case 3:
+                        f = _a.sent();
+                        return [3 /*break*/, 5];
+                    case 4:
+                        x_2 = _a.sent();
+                        m.remove();
+                        return [2 /*return*/];
+                    case 5:
+                        i = 0;
+                        _a.label = 6;
+                    case 6:
+                        if (!(i < L.length)) return [3 /*break*/, 11];
+                        Q('#ap_t').textContent = 'Memproses ' + (i + 1) + ' dari ' + L.length + ': ' + L[i].nama;
+                        Q('#ap_b').style.width = Math.round(i * 100 / L.length) + '%';
+                        _a.label = 7;
+                    case 7:
+                        _a.trys.push([7, 9, , 10]);
+                        return [4 /*yield*/, api('arsipSiswa', { siswa: L[i].id, folder: f.id })];
+                    case 8:
+                        r = _a.sent();
+                        okN++;
+                        tot += r.diganti || 0;
+                        return [3 /*break*/, 10];
+                    case 9:
+                        x_3 = _a.sent();
+                        gagal.push(L[i].nama);
+                        return [3 /*break*/, 10];
+                    case 10:
+                        i++;
+                        return [3 /*break*/, 6];
+                    case 11:
+                        m.remove();
+                        info(gagal.length ? 'Arsip selesai dengan catatan' : 'Arsip selesai', '<p><b>' + okN + '</b> dari ' + L.length + ' rapor berhasil disimpan' + (tot ? ' (' + tot + ' file lama diganti).' : '.') + '</p><p>Folder: <a href="' + esc(f.url) + '" target="_blank" rel="noopener"><b>' + esc(f.path) + '</b></a></p>' + (gagal.length ? '<p style="color:#b03060">Gagal: ' + gagal.map(esc).join(', ') + '. Coba arsipkan ulang.</p>' : ''));
+                        return [2 /*return*/];
+                }
+            });
+        });
+    }
+    function showPrint(L) { if (!L.length)
+        return toast('Tidak ada siswa'); Q('#pc').innerHTML = L.map(rapor).join(''); fitPrint(); Q('#print').style.display = 'block'; Q('#print').scrollTop = 0; pushLayer('print'); }
+    function closePrint() { Q('#print').style.display = 'none'; layerClosed(function (l) { return l.kind === 'print'; }); }
+    function rapor(s) {
+        var pr = per(s);
+        var d = RP[key(s)] || {}, X = D.Ref, kl = D.Kelompok.find(function (k) { return k.id == s.kelompok; }) || {}, cps = D.CP.filter(function (c) { return c.kelompok == s.kelompok; }), els = __spreadArray([], __read(new Set(cps.map(function (c) { return c.elemen; }))), false);
+        var guru = (D.Users.find(function (u) { return String(u.kelas).split(',').includes(String(s.kelompok)); }) || {}).nama || '';
+        var ph = function (a) { return a && a.length ? '<tr><td colspan="2" class="imc"><div class="im">' + a.map(function (f) { return '<img src="' + img(f) + '">'; }).join('') + '</div></td></tr>' : ''; };
+        var LVL = ['sangat baik', 'baik', 'cukup baik', 'perlu dilatih'];
+        /* deskripsi: Ananda + nama siswa + centangan + CP */
+        var desc = function (e) { var t = cps.filter(function (c) { return c.elemen === e && d.cp && d.cp[c.id] !== undefined && LVL[d.cp[c.id]]; }).map(function (c) { var cp = String(c.cp).trim().replace(/^dalam\s+/i, ''); while (cp && /[.\s]/.test(cp.slice(-1)))
+            cp = cp.slice(0, -1); return 'Ananda ' + esc(nick(s)) + ' ' + LVL[d.cp[c.id]] + ' dalam ' + esc(cp) + '.'; }); return t.length ? t.join(' ') : '-'; };
+        var el = function (e) { var x = (d.el || {})[e] || {}; return "<table class=\"blk\"><tr><th colspan=\"2\" style=\"text-align:left\">".concat(esc(e), "</th></tr><tr><td class=\"lb\">Capaian Pembelajaran</td><td style=\"text-align:justify\">").concat(desc(e), "</td></tr><tr><td class=\"lb\">Rencana semester depan</td><td>").concat(esc(x.rencana) || '-', "</td></tr><tr><td class=\"lb\">Rekomendasi orang tua</td><td>").concat(esc(x.rekom) || '-', "</td></tr>").concat(ph(x.foto), "</table>"); };
+        var kk = D.Kokur.find(function (x) { return x.kelompok == s.kelompok; }), ko = d.ko || {};
+        var kokur = kk ? "<table class=\"blk\"><tr><td class=\"lb\">Kegiatan</td><td>".concat(esc(kk.kegiatan), "</td></tr>").concat(String(kk.dimensi).split('|').filter(String).map(function (m) { return "<tr><td class=\"lb\">".concat(esc(m), "</td><td style=\"text-align:justify\">").concat(esc((ko[m] || {}).d || '-'), "</td></tr>"); }).join('')).concat(ph((ko._ || {}).foto), "</table>") : '<p>-</p>';
+        var es = D.EkstraSiswa.find(function (x) { return x.siswa == s.id; }) || {};
+        var eks = [es.wajib, es.pilihan].filter(Boolean).map(function (i) { var e = D.Ekstra.find(function (z) { return z.id == i; }); if (!e)
+            return ''; var x = (d.ex || {})[e.id] || {}; return "<table class=\"blk\"><tr><td class=\"lb\">".concat(esc(e.nama), "</td><td style=\"text-align:justify\">").concat(esc(x.d || '-'), "</td></tr>").concat(ph(x.foto), "</table>"); }).join('') || '<p>-</p>';
+        return "<div class=\"rp\"><div class=\"hd\">".concat(X.logo ? "<img src=\"".concat(img(X.logo), "\">") : '', "<div><h1>LAPORAN PERKEMBANGAN ANAK (RAPOR)</h1><h2>").concat(esc(X.sekolah || 'NAMA SEKOLAH'), "</h2><p>").concat(esc(X.alamat || ''), "</p></div></div>\n <table class=\"id\"><tr><td width=\"18%\">Nama Anak</td><td width=\"32%\">: ").concat(esc(s.nama), "</td><td width=\"20%\">Tinggi Badan</td><td>: ").concat(esc(pr.tb || '-'), " cm</td></tr><tr><td>Kelompok</td><td>: ").concat(esc(kl.nama), "</td><td>Berat Badan</td><td>: ").concat(esc(pr.bb || '-'), " kg</td></tr><tr><td>Fase</td><td>: ").concat(esc(kl.fase || 'Fondasi'), "</td><td>Tahun Pelajaran</td><td>: ").concat(esc(X.tahun), "</td></tr><tr><td></td><td></td><td>Semester</td><td>: ").concat(esc(X.semester), "</td></tr></table>\n <h3>A. Intrakurikuler (Capaian Pembelajaran)</h3>").concat(els.map(el).join('') || '<p>-</p>', "<h3>B. Kokurikuler</h3>").concat(kokur, "<h3>C. Ekstrakurikuler</h3>").concat(eks, "\n <h3>Rekap Kehadiran</h3><table><tr><th>Sakit</th><th>Izin</th><th>Tanpa Keterangan</th></tr><tr class=\"c\"><td>").concat(pr.sakit || 0, " hari</td><td>").concat(pr.izin || 0, " hari</td><td>").concat(pr.alpa || 0, " hari</td></tr></table>\n <h3>Refleksi Orang Tua</h3><div class=\"box\"></div>\n <div class=\"sg\"><div>&nbsp;<br>Orang Tua / Wali<div class=\"sp\"></div>( ........................ )</div><div>").concat(esc(X.tempat || '')).concat(X.tempat ? ', ' : '').concat(tgl(X.tgl), "<br>Guru Kelas").concat(X.ttdGuru ? "<img src=\"".concat(img(X.ttdGuru), "\">") : '<div class="sp"></div>', "<b><u>").concat(esc(guru || '........................'), "</u></b></div></div>\n <div class=\"sg\" style=\"justify-content:center\"><div>Mengetahui,<br>Kepala Sekolah").concat(X.ttdKs ? "<img src=\"".concat(img(X.ttdKs), "\">") : '<div class="sp"></div>', "<b><u>").concat(esc(X.kepsek || '........................'), "</u></b>").concat(X.nip ? "<br>NIP. ".concat(esc(X.nip)) : '', "</div></div></div>");
+    }
+    /* ---------- input TB & BB / kehadiran (per tahun pelajaran + semester) ---------- */
+    function perPage(page, title, fields) {
+        return __awaiter(this, void 0, void 0, function () {
+            var k, L, X;
+            var _this = this;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, api('periodik')];
+                    case 1:
+                        PR = _a.sent();
+                        k = curK(page, false, true), L = aktifS().filter(function (s) { return s.kelompok == k; }), X = D.Ref;
+                        set(title, selK(page, false, true) + '<p style="margin:0 0 12px;color:var(--mut)">Tahun Pelajaran <b>' + esc(X.tahun || '-') + '</b> &middot; Semester <b>' + esc(X.semester || '-') + '</b></p>' +
+                            table(['Nama Siswa'].concat(fields.map(function (f) { return f[1]; })), L.map(function (s) { var v = per(s); return [esc(s.nama)].concat(fields.map(function (f) { return '<input class="ti" type="number" min="0" step="' + f[2] + '" data-s="' + s.id + '" data-f="' + f[0] + '" value="' + esc(v[f[0]]) + '">'; })); })) +
+                            (L.length ? '<button class="btn lf" style="margin-top:14px" onclick="' + fn(function () { return __awaiter(_this, void 0, void 0, function () {
+                                var rows, arr;
+                                return __generator(this, function (_a) {
+                                    switch (_a.label) {
+                                        case 0:
+                                            rows = {};
+                                            document.querySelectorAll('#main input[data-s]').forEach(function (i) { var s = L.find(function (x) { return x.id == i.dataset.s; }), kk = key(s), r = rows[kk] = rows[kk] || { key: kk }, t = String(i.value).replace(',', '.').trim(), n = Number(t); r[i.dataset.f] = (t === '' || isNaN(n)) ? '' : n; });
+                                            arr = Object.keys(rows).map(function (x) { return rows[x]; });
+                                            return [4 /*yield*/, api('savePeriodik', { rows: arr })];
+                                        case 1:
+                                            _a.sent();
+                                            arr.forEach(function (r) { PR[r.key] = Object.assign(PR[r.key] || {}, r); });
+                                            toast('Tersimpan \u2714');
+                                            return [2 /*return*/];
+                                    }
+                                });
+                            }); }) + '">&#128190; Simpan</button>' : ''));
+                        return [2 /*return*/];
+                }
+            });
+        });
+    }
+    P.ukur = function () { return perPage('ukur', 'Input TB &amp; BB', [['tb', 'Tinggi Badan (cm)', '0.1'], ['bb', 'Berat Badan (kg)', '0.1']]); };
+    P.hadir = function () { return perPage('hadir', 'Input Kehadiran', [['sakit', 'Sakit (hari)', '1'], ['izin', 'Izin (hari)', '1'], ['alpa', 'Tanpa Keterangan (hari)', '1']]); };
+    /* ---------- Excel (.xlsx) tanpa pustaka luar: template & impor data siswa ---------- */
+    var CRC = (function () { var t = []; for (var n = 0; n < 256; n++) {
+        var c = n;
+        for (var k = 0; k < 8; k++)
+            c = c & 1 ? 0xEDB88320 ^ (c >>> 1) : c >>> 1;
+        t[n] = c >>> 0;
+    } return t; })();
+    var crc32 = function (u) { var c = 0xFFFFFFFF; for (var i = 0; i < u.length; i++)
+        c = CRC[(c ^ u[i]) & 255] ^ (c >>> 8); return (c ^ 0xFFFFFFFF) >>> 0; };
+    var U8 = function (s) { return new TextEncoder().encode(s); };
+    function zipStore(files) {
+        var parts = [], cd = [];
+        var off = 0;
+        files.forEach(function (f) {
+            var nm = U8(f.name), d = U8(f.text), crc = crc32(d);
+            var lh = new DataView(new ArrayBuffer(30));
+            lh.setUint32(0, 0x04034b50, true);
+            lh.setUint16(4, 20, true);
+            lh.setUint16(6, 0x0800, true);
+            lh.setUint16(12, 0x5A21, true);
+            lh.setUint32(14, crc, true);
+            lh.setUint32(18, d.length, true);
+            lh.setUint32(22, d.length, true);
+            lh.setUint16(26, nm.length, true);
+            parts.push(new Uint8Array(lh.buffer), nm, d);
+            var ch = new DataView(new ArrayBuffer(46));
+            ch.setUint32(0, 0x02014b50, true);
+            ch.setUint16(4, 20, true);
+            ch.setUint16(6, 20, true);
+            ch.setUint16(8, 0x0800, true);
+            ch.setUint16(14, 0x5A21, true);
+            ch.setUint32(16, crc, true);
+            ch.setUint32(20, d.length, true);
+            ch.setUint32(24, d.length, true);
+            ch.setUint16(28, nm.length, true);
+            ch.setUint32(42, off, true);
+            cd.push(new Uint8Array(ch.buffer), nm);
+            off += 30 + nm.length + d.length;
+        });
+        var cdl = cd.reduce(function (a, b) { return a + b.length; }, 0), e = new DataView(new ArrayBuffer(22));
+        e.setUint32(0, 0x06054b50, true);
+        e.setUint16(8, files.length, true);
+        e.setUint16(10, files.length, true);
+        e.setUint32(12, cdl, true);
+        e.setUint32(16, off, true);
+        return new Blob(parts.concat(cd, [new Uint8Array(e.buffer)]), { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+    }
+    var xe = function (s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); };
+    var XH = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>', NS = 'http://schemas.openxmlformats.org/spreadsheetml/2006/main', RS = 'http://schemas.openxmlformats.org/officeDocument/2006/relationships';
+    function sheetXml(rows, widths, hdr) {
+        var x = XH + '<worksheet xmlns="' + NS + '"><cols>' + widths.map(function (w, i) { return '<col min="' + (i + 1) + '" max="' + (i + 1) + '" width="' + w + '" style="2" customWidth="1"/>'; }).join('') + '</cols><sheetData>';
+        rows.forEach(function (r, ri) { x += '<row r="' + (ri + 1) + '">' + r.map(function (c, ci) { return '<c r="' + String.fromCharCode(65 + ci) + (ri + 1) + '" t="inlineStr" s="' + (hdr && ri === 0 ? 1 : 2) + '"><is><t xml:space="preserve">' + xe(c) + '</t></is></c>'; }).join('') + '</row>'; });
+        return x + '</sheetData></worksheet>';
+    }
+    var STY = XH + '<styleSheet xmlns="' + NS + '"><fonts count="2"><font><sz val="11"/><name val="Calibri"/></font><font><b/><sz val="11"/><name val="Calibri"/></font></fonts><fills count="3"><fill><patternFill patternType="none"/></fill><fill><patternFill patternType="gray125"/></fill><fill><patternFill patternType="solid"><fgColor rgb="FFE6DEFF"/></patternFill></fill></fills><borders count="1"><border><left/><right/><top/><bottom/><diagonal/></border></borders><cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs><cellXfs count="3"><xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0"/><xf numFmtId="49" fontId="1" fillId="2" borderId="0" xfId="0" applyFont="1" applyFill="1" applyNumberFormat="1"/><xf numFmtId="49" fontId="0" fillId="0" borderId="0" xfId="0" applyNumberFormat="1"/></cellXfs><cellStyles count="1"><cellStyle name="Normal" xfId="0" builtinId="0"/></cellStyles></styleSheet>';
+    var TPL_H = ['Nama Lengkap', 'Nama Panggilan', 'Tempat Lahir', 'Tanggal Lahir', 'Jenis Kelamin', 'Anak Ke', 'Jumlah Saudara', 'Tanggal Masuk', 'Kelompok', 'Nama Ayah', 'Nama Ibu', 'Pekerjaan Ayah', 'Pekerjaan Ibu'];
+    function buildTemplate() {
+        var kel = D.Kelompok.map(function (k) { return k.nama; }), k1 = (aktifK()[0] || {}).nama || 'Kelompok A';
+        var s1 = sheetXml([TPL_H, ['(contoh) Ahmad Rojak', 'Rojak', 'Surabaya', '2021-05-17', 'Laki-laki', '2', '3', '2026-07-13', k1, 'Budi', 'Siti', 'Wiraswasta', 'Ibu Rumah Tangga']], [26, 16, 16, 15, 15, 9, 15, 15, 16, 20, 20, 20, 20], true);
+        var pet = ['PETUNJUK PENGISIAN', '1. Isi data mulai baris ke-2 pada sheet "Data Siswa". Baris contoh (diawali tulisan (contoh)) tidak akan diimpor.', '2. Kolom wajib: Nama Lengkap dan Kelompok. Kolom lain boleh dikosongkan.', '3. Tanggal Lahir / Tanggal Masuk: tulis 2021-05-17 atau 17/05/2021.', '4. Jenis Kelamin: Laki-laki / Perempuan (atau L / P).', '5. Kelompok harus sama persis dengan nama kelompok berikut:'].concat(kel.map(function (n) { return '    - ' + n; }), ['', 'Siswa dengan Nama Lengkap + Tanggal Lahir yang sama dengan data yang sudah ada akan DIPERBARUI, selain itu ditambahkan sebagai siswa baru.']).map(function (t) { return [t]; });
+        return zipStore([
+            { name: '[Content_Types].xml', text: XH + '<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/><Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/><Override PartName="/xl/worksheets/sheet2.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/><Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/></Types>' },
+            { name: '_rels/.rels', text: XH + '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="' + RS + '/officeDocument" Target="xl/workbook.xml"/></Relationships>' },
+            { name: 'xl/workbook.xml', text: XH + '<workbook xmlns="' + NS + '" xmlns:r="' + RS + '"><sheets><sheet name="Data Siswa" sheetId="1" r:id="rId1"/><sheet name="Petunjuk" sheetId="2" r:id="rId2"/></sheets></workbook>' },
+            { name: 'xl/_rels/workbook.xml.rels', text: XH + '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="' + RS + '/worksheet" Target="worksheets/sheet1.xml"/><Relationship Id="rId2" Type="' + RS + '/worksheet" Target="worksheets/sheet2.xml"/><Relationship Id="rId3" Type="' + RS + '/styles" Target="styles.xml"/></Relationships>' },
+            { name: 'xl/styles.xml', text: STY }, { name: 'xl/worksheets/sheet1.xml', text: s1 }, { name: 'xl/worksheets/sheet2.xml', text: sheetXml(pet, [110], false) }
+        ]);
+    }
+    function dlTemplate() { var a = document.createElement('a'); a.href = URL.createObjectURL(buildTemplate()); a.download = 'Template_Data_Siswa.xlsx'; document.body.appendChild(a); a.click(); setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 3000); toast('Template diunduh'); }
+    function inflateRaw(u) {
+        return __awaiter(this, void 0, void 0, function () { var ds, w, _a; return __generator(this, function (_b) {
+            switch (_b.label) {
+                case 0:
+                    ds = new DecompressionStream('deflate-raw'), w = ds.writable.getWriter();
+                    w.write(u);
+                    w.close();
+                    _a = Uint8Array.bind;
+                    return [4 /*yield*/, new Response(ds.readable).arrayBuffer()];
+                case 1: return [2 /*return*/, new (_a.apply(Uint8Array, [void 0, _b.sent()]))()];
+            }
+        }); });
+    }
+    function readXlsx(buf) {
+        return __awaiter(this, void 0, void 0, function () {
+            var u, dv, e, n, p, z, i, meth, cs, nl, el, cl, lo, name_1, ds, txt, xml, ss, sx, sp, rid_1, _a, _b, _c, _d, x_4, out, _e, _f, _g;
+            var _this = this;
+            return __generator(this, function (_h) {
+                switch (_h.label) {
+                    case 0:
+                        u = new Uint8Array(buf), dv = new DataView(buf);
+                        e = u.length - 22;
+                        while (e >= 0 && dv.getUint32(e, true) !== 0x06054b50)
+                            e--;
+                        if (e < 0)
+                            throw new Error('bukan file .xlsx');
+                        n = dv.getUint16(e + 10, true);
+                        p = dv.getUint32(e + 16, true);
+                        z = {};
+                        for (i = 0; i < n; i++) {
+                            meth = dv.getUint16(p + 10, true), cs = dv.getUint32(p + 20, true), nl = dv.getUint16(p + 28, true), el = dv.getUint16(p + 30, true), cl = dv.getUint16(p + 32, true), lo = dv.getUint32(p + 42, true);
+                            name_1 = new TextDecoder().decode(u.subarray(p + 46, p + 46 + nl)), ds = lo + 30 + dv.getUint16(lo + 26, true) + dv.getUint16(lo + 28, true);
+                            z[name_1] = { meth: meth, raw: u.subarray(ds, ds + cs) };
+                            p += 46 + nl + el + cl;
+                        }
+                        txt = function (nm) { return __awaiter(_this, void 0, void 0, function () { var f, _a, _b, _c; return __generator(this, function (_d) {
+                            switch (_d.label) {
+                                case 0:
+                                    f = z[nm];
+                                    if (!f)
+                                        return [2 /*return*/, null];
+                                    _b = (_a = new TextDecoder()).decode;
+                                    if (!(f.meth === 0)) return [3 /*break*/, 1];
+                                    _c = f.raw;
+                                    return [3 /*break*/, 3];
+                                case 1: return [4 /*yield*/, inflateRaw(f.raw)];
+                                case 2:
+                                    _c = _d.sent();
+                                    _d.label = 3;
+                                case 3: return [2 /*return*/, _b.apply(_a, [_c])];
+                            }
+                        }); }); };
+                        xml = function (s) { return new DOMParser().parseFromString(s, 'application/xml'); };
+                        ss = [];
+                        return [4 /*yield*/, txt('xl/sharedStrings.xml')];
+                    case 1:
+                        sx = _h.sent();
+                        if (sx)
+                            ss = [].map.call(xml(sx).getElementsByTagName('si'), function (si) { return [].map.call(si.getElementsByTagName('t'), function (t) { return t.textContent; }).join(''); });
+                        sp = 'xl/worksheets/sheet1.xml';
+                        _h.label = 2;
+                    case 2:
+                        _h.trys.push([2, 5, , 6]);
+                        _a = xml;
+                        return [4 /*yield*/, txt('xl/workbook.xml')];
+                    case 3:
+                        rid_1 = _a.apply(void 0, [_h.sent()]).getElementsByTagName('sheet')[0].getAttribute('r:id');
+                        _c = (_b = [].forEach).call;
+                        _d = xml;
+                        return [4 /*yield*/, txt('xl/_rels/workbook.xml.rels')];
+                    case 4:
+                        _c.apply(_b, [_d.apply(void 0, [_h.sent()]).getElementsByTagName('Relationship'), function (r) { if (r.getAttribute('Id') === rid_1) {
+                                var t = r.getAttribute('Target');
+                                sp = t.charAt(0) === '/' ? t.slice(1) : 'xl/' + t;
+                            } }]);
+                        return [3 /*break*/, 6];
+                    case 5:
+                        x_4 = _h.sent();
+                        return [3 /*break*/, 6];
+                    case 6:
+                        if (!z[sp])
+                            sp = Object.keys(z).filter(function (k) { return /^xl\/worksheets\/sheet\d+\.xml/.test(k); }).sort()[0];
+                        if (!sp)
+                            throw new Error('lembar kerja tidak ditemukan');
+                        out = [];
+                        _f = (_e = [].forEach).call;
+                        _g = xml;
+                        return [4 /*yield*/, txt(sp)];
+                    case 7:
+                        _f.apply(_e, [_g.apply(void 0, [_h.sent()]).getElementsByTagName('row'), function (row) {
+                                var arr = [];
+                                [].forEach.call(row.getElementsByTagName('c'), function (c) {
+                                    var m = /^([A-Z]+)/.exec(c.getAttribute('r') || '');
+                                    var ci = 0;
+                                    if (m)
+                                        for (var q = 0; q < m[1].length; q++)
+                                            ci = ci * 26 + m[1].charCodeAt(q) - 64;
+                                    ci--;
+                                    var t = c.getAttribute('t'), v = c.getElementsByTagName('v')[0];
+                                    var val = '';
+                                    if (t === 's' && v)
+                                        val = ss[+v.textContent] || '';
+                                    else if (t === 'inlineStr')
+                                        val = [].map.call(c.getElementsByTagName('t'), function (x) { return x.textContent; }).join('');
+                                    else if (v)
+                                        val = v.textContent;
+                                    if (ci >= 0)
+                                        arr[ci] = val;
+                                });
+                                out.push(arr);
+                            }]);
+                        return [2 /*return*/, out];
+                }
+            });
+        });
+    }
+    var HDR = { namalengkap: 'nama', nama: 'nama', namapanggilan: 'panggilan', panggilan: 'panggilan', tempatlahir: 'tempat_lahir', tanggallahir: 'tgl_lahir', tgllahir: 'tgl_lahir', jeniskelamin: 'jk', jk: 'jk', anakke: 'anak_ke', jumlahsaudara: 'jml_saudara', tanggalmasuk: 'tgl_masuk', tglmasuk: 'tgl_masuk', kelompok: 'kelompok', namaayah: 'ayah', ayah: 'ayah', namaibu: 'ibu', ibu: 'ibu', pekerjaanayah: 'kerja_ayah', pekerjaanibu: 'kerja_ibu' };
+    function hdrKey(h) { var nz = String(h == null ? '' : h).toLowerCase().replace(/[^a-z]/g, ''); if (HDR[nz])
+        return HDR[nz]; var ks = Object.keys(HDR).filter(function (k) { return nz.indexOf(k) === 0; }).sort(function (a, b) { return b.length - a.length; }); return ks.length ? HDR[ks[0]] : ''; }
+    function toIso(v) {
+        v = String(v == null ? '' : v).trim();
+        if (!v)
+            return '';
+        if (isFinite(v) && +v > 10000 && +v < 80000)
+            return new Date(Date.UTC(1899, 11, 30) + Math.floor(+v) * 86400000).toISOString().slice(0, 10);
+        var m = /^(\d{4})[-\/.](\d{1,2})[-\/.](\d{1,2})/.exec(v);
+        if (m)
+            return m[1] + '-' + ('0' + m[2]).slice(-2) + '-' + ('0' + m[3]).slice(-2);
+        m = /^(\d{1,2})[-\/.](\d{1,2})[-\/.](\d{4})/.exec(v);
+        if (m)
+            return m[3] + '-' + ('0' + m[2]).slice(-2) + '-' + ('0' + m[1]).slice(-2);
+        return '';
+    }
+    function parseSiswa(rows) {
+        var map = (rows[0] || []).map(hdrKey);
+        if (map.indexOf('nama') < 0)
+            throw new Error('Kolom "Nama Lengkap" tidak ditemukan. Gunakan template yang disediakan.');
+        var data = [];
+        var _loop_1 = function (i) {
+            var o = {};
+            var any = false;
+            (rows[i] || []).forEach(function (v, ci) { var k = map[ci]; if (!k)
+                return; var s = String(v == null ? '' : v).trim(); if (k === 'tgl_lahir' || k === 'tgl_masuk')
+                s = toIso(s); if (s !== '')
+                any = true; o[k] = s; });
+            if (any && !/^\(contoh\)/i.test(o.nama || ''))
+                data.push(Object.assign({ _row: i + 1 }, o));
+        };
+        for (var i = 1; i < rows.length; i++) {
+            _loop_1(i);
+        }
+        return data;
+    }
+    function imporSiswa(el) {
+        return __awaiter(this, void 0, void 0, function () {
+            var f, data, _a, _b, x_5, r;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        f = el.files[0];
+                        el.value = '';
+                        if (!f)
+                            return [2 /*return*/];
+                        _c.label = 1;
+                    case 1:
+                        _c.trys.push([1, 4, , 5]);
+                        _a = parseSiswa;
+                        _b = readXlsx;
+                        return [4 /*yield*/, f.arrayBuffer()];
+                    case 2: return [4 /*yield*/, _b.apply(void 0, [_c.sent()])];
+                    case 3:
+                        data = _a.apply(void 0, [_c.sent()]);
+                        return [3 /*break*/, 5];
+                    case 4:
+                        x_5 = _c.sent();
+                        return [2 /*return*/, info('Gagal membaca file', '<p>' + esc(x_5.message || x_5) + '</p>')];
+                    case 5:
+                        if (!data.length)
+                            return [2 /*return*/, info('Tidak ada data', '<p>Tidak ada baris siswa yang dapat diimpor. Pastikan data diisi mulai baris ke-2.</p>')];
+                        return [4 /*yield*/, askOk('Impor data siswa', data.length + ' baris siswa akan diimpor. Siswa dengan nama lengkap dan tanggal lahir yang sama diperbarui, selain itu ditambahkan.', 'Ya, impor', '')];
+                    case 6:
+                        if (!(_c.sent()))
+                            return [2 /*return*/];
+                        return [4 /*yield*/, api('importSiswa', { rows: data })];
+                    case 7:
+                        r = _c.sent();
+                        return [4 /*yield*/, reload()];
+                    case 8:
+                        _c.sent();
+                        go(CUR);
+                        info('Hasil Impor', '<p><b>' + r.baru + '</b> siswa baru ditambahkan, <b>' + r.upd + '</b> siswa diperbarui' + (r.err.length ? ', <b>' + r.err.length + '</b> baris dilewati:' : '.') + '</p>' + (r.err.length ? '<div style="color:#b03060;font-size:13px;max-height:200px;overflow:auto">' + r.err.slice(0, 30).map(esc).join('<br>') + (r.err.length > 30 ? '<br>...' : '') + '</div>' : ''));
+                        return [2 /*return*/];
+                }
+            });
+        });
+    }
+    /* ---------- pengaturan ---------- */
+    P.set = function () { return set('Pengaturan', "<div class=\"card c3\" style=\"max-width:420px\"><h3>\uD83D\uDD11 Ganti Password</h3><label>Password lama<input id=\"pl\" type=\"password\"></label><label>Password baru (min. 5 karakter)<input id=\"pb\" type=\"password\"></label>\n <button class=\"btn lf\" onclick=\"".concat(fn(function () { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, api('pass', { lama: Q('#pl').value, baru: Q('#pb').value })];
+            case 1:
+                _a.sent();
+                Q('#pl').value = Q('#pb').value = '';
+                toast('Password diganti \u2714');
+                return [2 /*return*/];
+        }
+    }); }); }), "\">Simpan password</button></div>\n <button class=\"btn gr\" onclick=\"").concat(fn(function () { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, reload()];
+            case 1:
+                _a.sent();
+                toast('Data dimuat ulang \u2714');
+                return [2 /*return*/];
+        }
+    }); }); }), "\">\uD83D\uDD04 Muat ulang data</button>")); };
+    (function () {
+        var st = Q('#stat');
+        if (!apiReady()) {
+            st.textContent = '\u26A0\uFE0F API_URL belum diisi di index.html';
+            return;
+        }
+        st.textContent = '\u23F3 Menghubungkan ke server\u2026';
+        rpc('publicInfo', []).then(function (r) { window.brand(r); st.textContent = '\u2705 Server terhubung'; }, function (e) { st.textContent = '\u274C ' + e.message; });
+    })();
+    window.doLogin = doLogin;
+    window.__xlsx = { readXlsx: readXlsx, parse: parseSiswa, tpl: buildTemplate };
+    window.brand = brand;
+    window.go = go;
+    window.toggleSide = toggleSide;
+    window.closeSide = closeSide;
+    window.backTo = backTo;
+    window.logout = logout;
+    window.buildMenu = buildMenu;
+    window.closePrint = closePrint;
+    window.Q = Q;
+    window.FS = FS;
+    window.H = H;
+    window.CUR = '';
+})();
+</script></body></html>

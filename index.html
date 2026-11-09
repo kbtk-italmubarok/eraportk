@@ -144,9 +144,9 @@ body{min-height:100vh;min-height:100dvh}
  .tw tr{background:var(--glass);border:1px solid var(--gb);border-radius:18px;box-shadow:var(--sh);padding:6px 2px;margin-bottom:10px}
  .tw td{border:0;padding:7px 14px;display:flex;justify-content:space-between;align-items:center;gap:12px;text-align:right;overflow-wrap:anywhere}
  .tw td::before{content:attr(data-l);flex:none;max-width:42%;font-weight:800;font-size:11.5px;text-transform:uppercase;letter-spacing:.03em;color:var(--mut);text-align:left}
- .tw td[data-l=""]::before,.tw td[data-l="Aksi"]::before,.tw td:first-child::before{display:none}
+ .tw td[data-l=""]::before,.tw td[data-l="Aksi"]::before,.tw td[data-l="Cetak"]::before,.tw td:first-child::before{display:none}
  .tw td:first-child{justify-content:flex-start;text-align:left;font-weight:800;font-size:15.5px;color:var(--pd)}
- .tw td[data-l=""]:not(:first-child),.tw td[data-l="Aksi"]:not(:first-child){justify-content:flex-end;gap:6px;border-top:1px solid rgba(139,109,240,.12);margin-top:4px;padding-top:6px}
+ .tw td[data-l=""]:not(:first-child),.tw td[data-l="Aksi"]:not(:first-child),.tw td[data-l="Cetak"]:not(:first-child){justify-content:flex-end;gap:6px;border-top:1px solid rgba(139,109,240,.12);margin-top:4px;padding-top:6px}
  .tw td .btn{margin:0}
  .tw tbody tr:hover td{background:none}
  .tw td.empty{display:block;text-align:center;font-weight:600;color:var(--mut)}
@@ -918,22 +918,21 @@ var __values = (this && this.__values) || function(o) {
         }); }); }), "\"></label>") : '');
     }
     /* ---------- cetak ---------- */
-    P.cetak = function () { return __awaiter(_this, void 0, void 0, function () {
-        var rr, k, L;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0: return [4 /*yield*/, Promise.all([api('rapor'), api('periodik')])];
-                case 1:
-                    rr = _a.sent();
-                    RP = rr[0];
-                    PR = rr[1];
-                    k = curK('cetak', false, true);
-                    L = aktifS().filter(function (s) { return s.kelompok == k; });
-                    set('Cetak Rapor', selK('cetak', false, true) + "<button class=\"btn gr\" onclick=\"".concat(fn(function () { return arsipkan(L, k); }), "\">&#128230; Arsipkan rapor</button><button class=\"btn lf\" onclick=\"").concat(fn(function () { return showPrint(L); }), "\">\uD83D\uDDA8\uFE0F Cetak semua di kelompok ini</button>") + table(['Nama Siswa', 'Status', 'Cetak'], L.map(function (s) { return [esc(s.nama), RP[key(s)] ? '\u2705 Terisi' : '\u23f3 Belum diisi', "<button class=\"btn\" style=\"margin:0\" onclick=\"".concat(fn(function () { return showPrint([s]); }), "\">\uD83D\uDDA8\uFE0F Cetak</button>")]; })));
-                    return [2 /*return*/];
-            }
+    P.cetak = function () {
+        var k0 = curK('cetak', false, true);
+        return Promise.all([api('rapor'), api('periodik'), api('arsipStatus', { kelompok: k0 }).catch(function () { return {}; })]).then(function (rr) {
+            RP = rr[0];
+            PR = rr[1];
+            var AR = rr[2] || {}, k = curK('cetak', false, true), L = aktifS().filter(function (s) { return s.kelompok == k; });
+            set('Cetak Rapor', selK('cetak', false, true) + '<button class="btn gr" onclick="' + fn(function () { return arsipkan(L, k); }) + '">&#128230; Arsipkan rapor</button><button class="btn lf" onclick="' + fn(function () { return showPrint(L); }) + '">\uD83D\uDDA8\uFE0F Cetak semua di kelompok ini</button>' +
+                table(['Nama Siswa', 'Status Isi', 'Status Arsip', 'Cetak'], L.map(function (s) {
+                    return [esc(s.nama),
+                        RP[key(s)] ? '\u2705 Terisi' : '\u23f3 Belum diisi',
+                        AR[s.id] ? '&#128230; Terarsip<br><small style="color:var(--mut)">' + esc(AR[s.id]) + '</small>' : '\u23f3 Belum diarsipkan',
+                        '<button class="btn" style="margin:0" onclick="' + fn(function () { return showPrint([s]); }) + '">\uD83D\uDDA8\uFE0F Cetak</button>'];
+                })));
         });
-    }); };
+    };
     function arsipkan(L, k) {
         return __awaiter(this, void 0, void 0, function () {
             var X, m, f, okN, tot, gagal, x_2, i, r, x_3;
@@ -989,6 +988,8 @@ var __values = (this && this.__values) || function(o) {
                         return [3 /*break*/, 6];
                     case 11:
                         m.remove();
+                        if (CUR === 'cetak')
+                            go('cetak');
                         info(gagal.length ? 'Arsip selesai dengan catatan' : 'Arsip selesai', '<p><b>' + okN + '</b> dari ' + L.length + ' rapor berhasil disimpan' + (tot ? ' (' + tot + ' file lama diganti).' : '.') + '</p><p>Folder: <a href="' + esc(f.url) + '" target="_blank" rel="noopener"><b>' + esc(f.path) + '</b></a></p>' + (gagal.length ? '<p style="color:#b03060">Gagal: ' + gagal.map(esc).join(', ') + '. Coba arsipkan ulang.</p>' : ''));
                         return [2 /*return*/];
                 }

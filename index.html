@@ -195,6 +195,12 @@ body{min-height:100vh;min-height:100dvh}
 .eye:hover{opacity:1;background:rgba(167,139,250,.18)}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 
+.tb{display:flex;flex-wrap:wrap;gap:10px 12px;align-items:center;margin-bottom:16px}
+.tb .sel{margin:0}
+.tg{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:7px 12px;border-radius:999px;background:var(--glass);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);border:1px solid var(--gb);box-shadow:var(--sh)}
+.tg span{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);margin-right:2px}
+.tg .btn{margin:0;padding:8px 16px}
+@media(max-width:640px){.tb{flex-direction:column;align-items:stretch}.tg{border-radius:20px;padding:10px 12px}.tg span{width:100%}.tg .btn{flex:1}}
 /* ===== pelengkap rapor ===== */
 .rp.pl{display:flex;flex-direction:column;height:297mm;overflow:hidden}
 .rp.pl,.rp.pl *{font-family:'Times New Roman',Times,serif}
@@ -318,20 +324,21 @@ var __values = (this && this.__values) || function(o) {
     var LV = ['Sangat Baik', 'Baik', 'Cukup Baik', 'Perlu Dilatih'];
     var DIM = ['Keimanan dan Ketakwaan terhadap Tuhan YME', 'Kewargaan', 'Penalaran Kritis', 'Kreativitas', 'Kolaborasi', 'Kemandirian', 'Kesehatan', 'Komunikasi'];
     var BLN = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
-    var MENU = [['dash', '&#127968;', 'Dashboard'], ['guru', '&#128105;&#8205;&#127979;', 'Data Guru', 1], ['siswa', '&#129490;', 'Data Siswa'], ['kel', '&#127979;', 'Kelompok & Ekstra', 1], ['ref', '&#127991;&#65039;', 'Data Referensial', 1], ['cp', '&#127919;', 'Capaian Pembelajaran', 1], ['kokur', '&#127912;', 'Kokurikuler', 1], ['ekstra', '&#9917;', 'Ekstrakurikuler', 1], ['ukur', '&#128207;', 'Input TB & BB'], ['hadir', '&#128197;', 'Input Kehadiran'], ['input', '&#9999;&#65039;', 'Input Rapor'], ['cetak', '&#128424;&#65039;', 'Cetak Rapor'], ['set', '&#9881;&#65039;', 'Pengaturan']];
-    var GRP = [['Data Master', ['guru', 'siswa', 'kel', 'ref', 'cp', 'kokur', 'ekstra']], ['Rapor', ['ukur', 'hadir', 'input', 'cetak']]];
+    var MENU = [['dash', '&#127968;', 'Dashboard'], ['guru', '&#128105;&#8205;&#127979;', 'Data Guru', 1], ['siswa', '&#129490;', 'Data Siswa'], ['kel', '&#127979;', 'Kelompok & Ekstra', 1], ['ref', '&#127991;&#65039;', 'Data Referensial', 1], ['cp', '&#127919;', 'Capaian Pembelajaran', 1], ['kokur', '&#127912;', 'Kokurikuler', 1], ['ekstra', '&#9917;', 'Ekstrakurikuler', 1], ['ukur', '&#128207;', 'Input TB & BB'], ['hadir', '&#128197;', 'Input Kehadiran'], ['input', '&#9999;&#65039;', 'Input Rapor'], ['cetak', '&#128424;&#65039;', 'Cetak Rapor'], ['arsip', '&#128194;', 'Lihat Arsip'], ['set', '&#9881;&#65039;', 'Pengaturan']];
+    var GRP = [['Data Master', ['guru', 'siswa', 'kel', 'ref', 'cp', 'kokur', 'ekstra']], ['Rapor', ['ukur', 'hadir', 'input', 'cetak']], ['Arsip', ['arsip']]];
     var T = null, U = null, D = {}, RP = {}, R = {}, CUR = '', H = [], FS = {}, PBn = 0, bz = 0;
     var esc = function (s) { return String(s !== null && s !== void 0 ? s : '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); };
     var img = function (id) { return id ? "https://lh3.googleusercontent.com/d/".concat(id) : ''; };
     var tgl = function (i) { if (!i)
         return ''; var d = new Date(i + 'T00:00:00'); return isNaN(d) ? i : "".concat(d.getDate(), " ").concat(BLN[d.getMonth()], " ").concat(d.getFullYear()); };
     /* ---------- cache data (dimuat sekali saat login) ---------- */
+    var ARL = null; /* daftar semua file arsip (cache) */
     var ARP = {}; /* status arsip per kelompok (promise), diisi di latar belakang */
     function arsipP(k) {
         if (!ARP[k]) ARP[k] = api('arsipStatus', { kelompok: k }, 0, true).catch(function () { delete ARP[k]; return {}; });
         return ARP[k];
     }
-    function prefetchArsip() { ARP = {}; try { aktifK().forEach(function (k) { arsipP(k.id); }); } catch (e) { } }
+    function prefetchArsip() { ARP = {}; ARL = null; try { aktifK().forEach(function (k) { arsipP(k.id); }); } catch (e) { } }
     function loadAll(step) {
         var n = 0, up = function () { n++; if (step) step(n); };
         return Promise.all([
@@ -1059,7 +1066,9 @@ var __values = (this && this.__values) || function(o) {
         var k0 = curK('cetak', false, true);
         return arsipP(k0).then(function (ar) {
             var AR = ar || {}, k = curK('cetak', false, true), L = aktifS().filter(function (s) { return s.kelompok == k; });
-            set('Cetak Rapor', selK('cetak', false, true) + '<button class="btn gr" onclick="' + fn(function () { return arsipkan(L, k); }) + '">&#128230; Arsipkan rapor</button><button class="btn gr" onclick="' + fn(function () { return arsipkan(L, k, 'pel'); }) + '">&#128230; Arsipkan pelengkap rapor</button><button class="btn lf" onclick="' + fn(function () { return showPrint(L); }) + '">\uD83D\uDDA8\uFE0F Cetak semua di kelompok ini</button><button class="btn lf" onclick="' + fn(function () { return showPrint(L, pelengkap); }) + '">\uD83D\uDDA8\uFE0F Cetak semua pelengkap rapor</button>' +
+            set('Cetak Rapor', '<div class="tb">' + selK('cetak', false, true) +
+                '<div class="tg"><span>Rapor</span><button class="btn lf" onclick="' + fn(function () { return showPrint(L); }) + '">\uD83D\uDDA8\uFE0F Cetak semua</button><button class="btn gr" onclick="' + fn(function () { return arsipkan(L, k); }) + '">&#128230; Arsipkan</button></div>' +
+                '<div class="tg"><span>Pelengkap Rapor</span><button class="btn lf" onclick="' + fn(function () { return showPrint(L, pelengkap); }) + '">\uD83D\uDDA8\uFE0F Cetak semua</button><button class="btn gr" onclick="' + fn(function () { return arsipkan(L, k, 'pel'); }) + '">&#128230; Arsipkan</button></div></div>' +
                 table(['Nama Siswa', 'Status Isi', 'Status Arsip', 'Cetak'], L.map(function (s) {
                     return [esc(s.nama),
                         RP[key(s)] ? '\u2705 Terisi' : '\u23f3 Belum diisi',
@@ -1068,6 +1077,39 @@ var __values = (this && this.__values) || function(o) {
                 })));
         });
     };
+
+    /* ---------- lihat arsip: seluruh file arsip rapor & pelengkap rapor ---------- */
+    function arsipFilter() {
+        var q = String(FS.aq || '').toLowerCase();
+        return (ARL || []).filter(function (r) {
+            return (!FS.ak || r.k === FS.ak) && (!FS.ap || r.p === FS.ap) && (!FS.aj || r.j === FS.aj) && (!q || r.n.toLowerCase().indexOf(q) >= 0);
+        }).sort(function (a, b) { return a.k.localeCompare(b.k) || b.p.localeCompare(a.p) || a.n.localeCompare(b.n) || a.j.localeCompare(b.j); });
+    }
+    function arsipT() {
+        var L = arsipFilter(), el = Q('#arl_t');
+        if (!el) return;
+        el.innerHTML = '<p style="color:var(--mut);font-weight:700;margin:0 0 8px">' + L.length + ' file</p>' + table(['Nama Siswa', 'Jenis', 'Kelompok', 'Periode', 'Diarsipkan', 'File'], L.map(function (r) {
+            return [esc(r.n), r.j === 'Rapor' ? '&#128221; Rapor' : '&#128214; Pelengkap Rapor', esc(r.k), esc(r.p), esc(r.t), '<a class="btn" style="margin:0;text-decoration:none;display:inline-block;white-space:nowrap" href="' + esc(r.u) + '" target="_blank" rel="noopener">&#128196; Buka</a>'];
+        }));
+    }
+    function arsipSel(key, all, vals) {
+        return '<select class="sel" onchange="FS.' + key + '=this.value;arsipT()"><option value="">' + all + '</option>' + vals.map(function (v) { return '<option value="' + esc(v[0]) + '" ' + (FS[key] === v[0] ? 'selected' : '') + '>' + esc(v[1]) + '</option>'; }).join('') + '</select>';
+    }
+    function arsipDraw() {
+        var uniq = function (f) { return __spreadArray([], __read(new Set((ARL || []).map(f))), false).sort(); };
+        set('Lihat Arsip', '<div class="tb">' + arsipSel('ak', 'Semua kelompok', uniq(function (r) { return r.k; }).map(function (v) { return [v, v]; })) +
+            arsipSel('ap', 'Semua periode', uniq(function (r) { return r.p; }).reverse().map(function (v) { return [v, v]; })) +
+            arsipSel('aj', 'Rapor & pelengkap', [['Rapor', 'Rapor saja'], ['Pelengkap', 'Pelengkap rapor saja']]) +
+            '<input class="sel" placeholder="Cari nama siswa&#8230;" value="' + esc(FS.aq || '') + '" oninput="FS.aq=this.value;arsipT()" style="margin:0">' +
+            '<button class="btn gr" style="margin:0" onclick="' + fn(function () { ARL = null; return P.arsip(); }) + '">&#128260; Muat ulang</button></div><div id="arl_t"></div>');
+        arsipT();
+    }
+    P.arsip = function () {
+        if (ARL) return arsipDraw();
+        set('Lihat Arsip', '<p class="empty">Memuat daftar arsip&#8230;</p>');
+        return api('arsipDaftar').then(function (r) { ARL = r || []; if (CUR === 'arsip') arsipDraw(); }, function () { if (CUR === 'arsip') set('Lihat Arsip', '<p class="empty">Daftar arsip gagal dimuat.</p><button class="btn" onclick="' + fn(function () { return P.arsip(); }) + '">&#128260; Coba lagi</button>'); });
+    };
+    window.arsipT = arsipT;
     function arsipkan(L, k, jenis) {
         return __awaiter(this, void 0, void 0, function () {
             var X, m, f, okN, tot, gagal, x_2, i, r, x_3;
@@ -1124,6 +1166,7 @@ var __values = (this && this.__values) || function(o) {
                     case 11:
                         m.remove();
                         delete ARP[k];
+                        ARL = null;
                         if (CUR === 'cetak')
                             go('cetak');
                         info(gagal.length ? 'Arsip selesai dengan catatan' : 'Arsip selesai', '<p><b>' + okN + '</b> dari ' + L.length + (jenis === 'pel' ? ' pelengkap rapor' : ' rapor') + ' berhasil disimpan' + (tot ? ' (' + tot + ' file lama diganti).' : '.') + '</p><p>Folder: <a href="' + esc(f.url) + '" target="_blank" rel="noopener"><b>' + esc(f.path) + '</b></a></p>' + (gagal.length ? '<p style="color:#b03060">Gagal: ' + gagal.map(esc).join(', ') + '. Coba arsipkan ulang.</p>' : ''));

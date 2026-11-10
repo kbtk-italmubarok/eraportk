@@ -204,13 +204,14 @@ body{min-height:100vh;min-height:100dvh}
 .rp.pl table{margin:0;width:auto}
 .rp.pl td{border:0;padding:1.5mm 2mm;font-size:12pt;vertical-align:top}
 .rp.pl table.sk td{font-weight:700;font-size:13pt;padding:2mm}
-.rp.pl table.kv{width:100%}
+.rp.pl table.kv{width:100%;table-layout:fixed}
 .rp.pl table.kv td{padding:.9mm 1mm;line-height:1.35}
 .rp.pl .ol{margin:0;padding-left:9mm}.rp.pl .ol li{margin-bottom:2mm;line-height:1.5}.rp.pl .ol ul{margin:1mm 0 0;padding-left:8mm;list-style:'- '}
 .rp.pl .ttd{display:flex;justify-content:space-between;align-items:flex-start;margin-top:6mm;padding:0 8mm}
 .rp.pl .foto{width:30mm;height:40mm;border:1px solid #000;display:flex;align-items:center;justify-content:center;text-align:center;font-size:10pt;line-height:1.3}
 .rp.pl .ttd .tc{width:78mm;text-align:center}.rp.pl .ttd img{height:14mm;display:block;margin:1mm auto}
 @media print{.rp.pl{height:265mm!important;min-height:0!important;overflow:hidden}}
+@media print{.pbar{display:none!important}#print{background:#fff!important;padding:0!important}.rp{margin:0!important;padding:0!important;width:auto!important;min-height:0!important;box-shadow:none!important;zoom:1!important}.rp.pl{display:flex!important}}
 </style></head><body>
 <script>
 /* ===== KONFIGURASI =====
@@ -1144,7 +1145,7 @@ var __values = (this && this.__values) || function(o) {
         var p1 = '<div class="rp pl">' + '<div style="margin-top:16mm">' + judul(28, 20, 22) + '</div>' + '<div style="text-align:center;margin-top:22mm;flex:1">' + (X.logo ? '<img src="' + img(X.logo) + '" style="height:62mm;max-width:75mm;object-fit:contain">' : '') + '</div><div style="margin-bottom:14mm">' + kotak + '</div></div>';
         var sk = [['Nama TK', X.sekolah], ['NPSN', X.npsn], ['Alamat', X.sek_alamat], ['Desa/Kelurahan', X.sek_desa], ['Kecamatan', X.sek_kec], ['Kabupaten/ Kota', X.sek_kab], ['Provinsi', X.sek_prov]];
         var p2 = '<div class="rp pl"><div style="text-align:center;margin-top:4mm"><img src="' + GARUDA + '" style="height:38mm"></div><div style="margin-top:8mm">' + judul(22, 16, 16) + '</div>' +
-            '<div style="margin:14mm 0 0 14mm;flex:1"><table class="sk">' + sk.map(function (r) { return '<tr><td width="52mm">' + r[0] + '</td><td>: ' + esc(r[1] || '-') + '</td></tr>'; }).join('') + '</table></div><div style="margin-bottom:12mm">' + kotak + '</div></div>';
+            '<div style="margin:14mm 0 0 14mm;flex:1"><table class="sk">' + sk.map(function (r) { return '<tr><td style="width:52mm">' + r[0] + '</td><td>: ' + esc(r[1] || '-') + '</td></tr>'; }).join('') + '</table></div><div style="margin-bottom:12mm">' + kotak + '</div></div>';
         var p3 = '<div class="rp pl"><p class="jd" style="font-size:14pt;margin:14mm 0 8mm">PETUNJUK PENGGUNAAN</p><ol class="ol" style="font-size:12pt">' +
             ['Buku Laporan Asesmen Capaian Pembelajaran Anak Didik TK ini dipergunakan selama mengikuti pendidikan di TK',
                 'Buku Asesmen Capaian Pembelajaran Anak Didik TK ini diisi oleh guru kelas',
@@ -1157,8 +1158,8 @@ var __values = (this && this.__values) || function(o) {
             [0, '5.', 'Tempat dan Tanggal Lahir', ttl], [0, '6.', 'Agama', s.agama || 'Islam'], [0, '7.', 'Anak Ke', s.anak_ke], [0, '8.', 'Nama Orang Tua/ Wali', null], [1, 'a.', 'Ayah', s.ayah], [1, 'b.', 'Ibu', s.ibu],
             [0, '9.', 'Pekerjaan Orang Tua/ Wali', null], [1, 'a.', 'Ayah', s.kerja_ayah], [1, 'b.', 'Ibu', s.kerja_ibu], [0, '10.', 'Alamat Orang Tua/ Wali', null], [1, 'a.', 'Jalan', s.ortu_jalan], [2, '', 'RT / RW', s.ortu_rtrw],
             [2, '', 'Telepon/HP', s.ortu_telp], [1, 'b.', 'Desa/ Kelurahan', s.ortu_desa], [1, 'c.', 'Kecamatan', s.ortu_kec], [1, 'd.', 'Kabupaten/ Kota', s.ortu_kab], [1, 'e.', 'Provinsi', s.ortu_prov]];
-        var kv = K.map(function (r) { var pad = r[0] === 0 ? 0 : (r[0] === 1 ? 6 : 12); return '<tr><td width="9mm">' + r[1] + '</td><td width="68mm" style="padding-left:' + pad + 'mm">' + r[2] + '</td><td width="3mm">' + (r[3] === null ? '' : ':') + '</td><td>' + (r[3] === null ? '' : esc(r[3] || '')) + '</td></tr>'; }).join('');
-        var p4 = '<div class="rp pl"><p class="jd" style="font-size:14pt;margin:8mm 0 6mm">KETERANGAN DIRI ANAK DIDIK</p><table class="kv">' + kv + '</table>' +
+        var kv = K.map(function (r) { var pad = r[0] === 0 ? 0 : (r[0] === 1 ? 10 : 17), w = r[0] === 0 ? 9 : 7; return '<tr><td style="padding-left:' + pad + 'mm">' + (r[1] ? '<span style="display:inline-block;width:' + w + 'mm">' + r[1] + '</span>' : '') + r[2] + '</td><td>' + (r[3] === null ? '' : ':') + '</td><td>' + (r[3] === null ? '' : esc(r[3] || '')) + '</td></tr>'; }).join('');
+        var p4 = '<div class="rp pl"><p class="jd" style="font-size:14pt;margin:8mm 0 6mm">KETERANGAN DIRI ANAK DIDIK</p><table class="kv"><colgroup><col style="width:84mm"><col style="width:5mm"><col></colgroup>' + kv + '</table>' +
             '<div class="ttd"><div class="foto">Pas Foto<br>3 x 4</div><div class="tc">' + esc(X.tempat || '') + (X.tempat ? ', ' : '') + tgl(X.tgl_pel || X.tgl) + '<br>Kepala Sekolah<br>' + esc(X.sekolah || '') + (X.ttdKs ? '<img src="' + img(X.ttdKs) + '">' : '<div style="height:16mm"></div>') + '<b><u>' + esc(X.kepsek || '........................') + '</u></b>' + (X.nip ? '<br>NIP. ' + esc(X.nip) : '') + '</div></div></div>';
         return p1 + p2 + p3 + p4;
     }
